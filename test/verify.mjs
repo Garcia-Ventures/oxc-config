@@ -19,7 +19,8 @@ for (const name of modules) {
   assert.ok(mod, `${name} should import`);
 }
 
-const { base, typescript, react, vite, next, recommended, typeAware, oxfmtConfig } = await import('../dist/index.js');
+const { base, typescript, react, vite, next, recommended, typeAware, oxfmtConfig, formatIgnores } =
+  await import('../dist/index.js');
 
 for (const [name, cfg] of Object.entries({ base, typescript, react, vite, next, recommended, typeAware })) {
   assert.equal(typeof cfg, 'object', `${name} should be an object`);
@@ -47,5 +48,12 @@ assert.equal(oxfmtConfig.bracketSpacing, true);
 assert.ok(oxfmtConfig.sortImports, 'sortImports enabled');
 assert.ok(oxfmtConfig.sortPackageJson, 'sortPackageJson enabled');
 assert.ok(oxfmtConfig.sortTailwindcss, 'sortTailwindcss enabled');
+
+// Formatter ignores must never swallow source/config/workflow/docs files,
+// otherwise tools like lint-staged fail when every staged file is ignored.
+assert.deepEqual(oxfmtConfig.ignorePatterns, formatIgnores, 'oxfmt uses formatIgnores');
+for (const forbidden of ['workflows', 'README', 'CHANGELOG', 'LICENSE', 'CONTRIBUTING', 'vite.config', 'tsconfig']) {
+  assert.ok(!formatIgnores.some((p) => p.includes(forbidden)), `formatIgnores must not contain ${forbidden}`);
+}
 
 console.log('All @gv-tech/oxc-config smoke tests passed.');

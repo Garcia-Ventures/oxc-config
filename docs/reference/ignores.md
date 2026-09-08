@@ -1,9 +1,10 @@
 # Reference: Ignore Patterns
 
-`@gv-tech/oxc-config/ignores` exports three ignore lists plus file-pattern
-helpers. Ported from `@gv-tech/eslint-config` `commonIgnores` and
-adapted to Oxlint/Oxfmt gitignore-style matching (patterns are rooted
-at the directory containing the config file).
+`@gv-tech/oxc-config/ignores` exports lint ignore lists, a formatter
+ignore list, plus file-pattern helpers. Ported from
+`@gv-tech/eslint-config` `commonIgnores` and adapted to Oxlint/Oxfmt
+gitignore-style matching (patterns are rooted at the directory
+containing the config file).
 
 ## File patterns
 
@@ -23,6 +24,18 @@ at the directory containing the config file).
   `test-results/`. Used by the `vite` and `recommended` presets.
 - **`nextIgnores`** — `commonIgnores` plus `.next/`, `out/`,
   `next-env.d.ts`. Used by the `next` preset.
+- **`formatIgnores`** — generated or foreign artifacts only
+  (`node_modules`, build output, lockfiles, caches, env files). Used
+  by `oxfmtConfig`. Deliberately excludes source files, configs,
+  workflows, and docs so they stay formattable.
+
+## Lint vs format ignores
+
+The lint lists (`commonIgnores`, `viteIgnores`, `nextIgnores`) are
+broad — they skip lockfiles, TS configs, and docs that Oxlint should
+never process. The formatter list (`formatIgnores`) is narrow: if a
+formatter ignore swallowed a committable file, tools like lint-staged
+would fail whenever every staged file is ignored.
 
 ## Customizing
 

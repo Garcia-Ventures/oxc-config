@@ -44,7 +44,6 @@ export const commonIgnores: string[] = [
   '**/CONTRIBUTING.md',
   '**/FUNDING.yml',
   '**/PULL_REQUEST_TEMPLATE/**',
-  '**/workflows/**',
   '**/wrangler.toml',
   '**/project.json',
   '**/nx.json',
@@ -90,3 +89,56 @@ export const viteIgnores: string[] = [...commonIgnores, '**/playwright-report/**
 
 /** Next.js-specific ignores (extends common) */
 export const nextIgnores: string[] = [...commonIgnores, '.next/**', 'out/**', 'next-env.d.ts'];
+
+/**
+ * Ignore patterns for Oxfmt (formatting).
+ *
+ * Deliberately narrower than the lint-oriented lists above: only generated or foreign artifacts. Source files, configs,
+ * workflows, and docs MUST stay formattable — otherwise tools like lint-staged fail when every staged file is ignored.
+ */
+export const formatIgnores: string[] = [
+  '**/node_modules/**',
+  '**/dist/**',
+  '**/build/**',
+  '**/out/**',
+  '**/coverage/**',
+  '**/.next/**',
+  '**/.turbo/**',
+  '**/.cache/**',
+  '**/.yarn/**',
+  '**/.git/**',
+  '**/.nx/**',
+  '**/.agent/**',
+  '**/.husky/**',
+  '**/public/build/**',
+  '**/.expo/**',
+  '**/.vscode/**',
+  '**/.idea/**',
+  '**/.DS_Store',
+  '**/.env*',
+  '**/package-lock.json',
+  '**/bun.lockb',
+  '**/bun.lock',
+  '**/pnpm-lock.yaml',
+  '**/yarn.lock',
+  '**/assets/**',
+  '**/public/**',
+  '**/dist-site/**',
+  '**/.vercel/**',
+  '**/.output/**',
+  '**/.firebase/**',
+  '**/.netlify/**',
+  '**/.storybook/**',
+  '**/.parcel-cache/**',
+  '**/.eslintcache',
+  '**/.stylelintcache',
+  '**/.coverage/**',
+  '**/.nyc_output/**',
+  '**/.swc/**',
+  '**/tmp/**',
+  '**/temp/**',
+  '**/logs/**',
+  '**/.pnp.*',
+  '**/playwright-report/**',
+  '**/test-results/**',
+];

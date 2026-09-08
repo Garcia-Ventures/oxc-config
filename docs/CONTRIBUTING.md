@@ -18,15 +18,17 @@ Thank you for your interest in contributing to this project! This guide will hel
    - Click the "Fork" button at the top right of the repository page
 
 2. **Clone your fork**
-    ```bash
-    git clone https://github.com/YOUR-USERNAME/oxc-config.git
-    cd oxc-config
-    ```
+
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/oxc-config.git
+   cd oxc-config
+   ```
 
 3. **Add the upstream remote**
-    ```bash
-    git remote add upstream https://github.com/Garcia-Ventures/oxc-config.git
-    ```
+
+   ```bash
+   git remote add upstream https://github.com/Garcia-Ventures/oxc-config.git
+   ```
 
 4. **Keep your fork synchronized**
    ```bash
@@ -119,6 +121,7 @@ chore(deps): update dependencies to latest versions
 ### Before Submitting
 
 1. **Update your branch**
+
    ```bash
    git checkout develop
    git pull upstream develop
@@ -138,6 +141,7 @@ chore(deps): update dependencies to latest versions
 ### Submitting a Pull Request
 
 1. **Push your branch**
+
    ```bash
    git push origin your-feature-branch
    ```
