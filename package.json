@@ -1,6 +1,6 @@
 {
   "name": "@gv-tech/oxc-config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Shareable Oxlint + Oxfmt configuration for Garcia Ventures projects",
   "keywords": [
     "config",
