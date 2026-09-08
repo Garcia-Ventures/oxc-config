@@ -25,8 +25,10 @@ containing the config file).
 - **`nextIgnores`** — `commonIgnores` plus `.next/`, `out/`,
   `next-env.d.ts`. Used by the `next` preset.
 - **`formatIgnores`** — generated or foreign artifacts only
-  (`node_modules`, build output, lockfiles, caches, env files). Used
-  by `oxfmtConfig`. Deliberately excludes source files, configs,
+  (`node_modules`, build output, lockfiles, caches, env files), plus
+  `CHANGELOG.md`, which release-please generates and owns in its own
+  style (formatting it would fail CI on every release PR). Used by
+  `oxfmtConfig`. Deliberately excludes source files, configs,
   workflows, and docs so they stay formattable.
 
 ## Lint vs format ignores

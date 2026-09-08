@@ -121,6 +121,9 @@ export const formatIgnores: string[] = [
   '**/bun.lock',
   '**/pnpm-lock.yaml',
   '**/yarn.lock',
+  // Release-please generates and owns CHANGELOG.md in its own style;
+  // formatting it would fail CI on every release PR.
+  '**/CHANGELOG.md',
   '**/assets/**',
   '**/public/**',
   '**/dist-site/**',
