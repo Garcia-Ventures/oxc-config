@@ -40,9 +40,10 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      # OIDC trusted publishing requires npm >= 11.5.1.
+      # Staged publishing requires npm >= 11.15.0.
       - run: npm install -g npm@latest
       - run: bun install --frozen-lockfile
       - run: bun run build
-      # Provenance attestations are generated automatically via OIDC.
-      - run: npm publish --provenance --access public
+      # Stage-only trusted publisher: CI submits to the stage queue;
+      # a maintainer approves with 2FA before it goes live.
+      - run: npm stage publish --access public
