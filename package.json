@@ -1,0 +1,126 @@
+{
+  "name": "@gv-tech/oxc-config",
+  "version": "0.1.0",
+  "description": "Shareable Oxlint + Oxfmt configuration for Garcia Ventures projects",
+  "keywords": [
+    "config",
+    "eslint",
+    "nextjs",
+    "oxc",
+    "oxfmt",
+    "oxlint",
+    "prettier",
+    "react",
+    "typescript",
+    "vite"
+  ],
+  "homepage": "https://github.com/Garcia-Ventures/oxc-config#readme",
+  "bugs": {
+    "url": "https://github.com/Garcia-Ventures/oxc-config/issues"
+  },
+  "license": "MIT",
+  "author": "Eric N. Garcia <eng618@garciaericn.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Garcia-Ventures/oxc-config.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/index.d.ts"
+      ],
+      "base": [
+        "./dist/base.d.ts"
+      ],
+      "typescript": [
+        "./dist/typescript.d.ts"
+      ],
+      "react": [
+        "./dist/react.d.ts"
+      ],
+      "vite": [
+        "./dist/vite.d.ts"
+      ],
+      "next": [
+        "./dist/next.d.ts"
+      ],
+      "recommended": [
+        "./dist/recommended.d.ts"
+      ],
+      "type-aware": [
+        "./dist/type-aware.d.ts"
+      ],
+      "oxfmt": [
+        "./dist/oxfmt.d.ts"
+      ],
+      "ignores": [
+        "./dist/ignores.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./base": "./dist/base.js",
+    "./typescript": "./dist/typescript.js",
+    "./react": "./dist/react.js",
+    "./vite": "./dist/vite.js",
+    "./next": "./dist/next.js",
+    "./recommended": "./dist/recommended.js",
+    "./type-aware": "./dist/type-aware.js",
+    "./oxfmt": "./dist/oxfmt.js",
+    "./ignores": "./dist/ignores.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "clean": "rm -rf dist",
+    "format": "oxfmt --write .",
+    "format:ci": "oxfmt --check .",
+    "lint": "oxlint .",
+    "lint:fix": "bun run lint --fix",
+    "prepack": "bun run build",
+    "prepare": "husky",
+    "test": "bun run build && node test/verify.mjs",
+    "validate": "bun run build && bun run lint && bun run format:ci && bun run test && bun x publint --pack bun"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "oxfmt": "^0.67.0",
+    "oxlint": "^1.82.0",
+    "oxlint-tsgolint": "^7.0.0",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "oxfmt": ">=0.9.0",
+    "oxlint": ">=1.0.0",
+    "typescript": ">=5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}": [
+      "oxfmt --write",
+      "oxlint --fix"
+    ],
+    "*.{json,jsonc,md,yml,yaml}": [
+      "oxfmt --write"
+    ]
+  },
+  "engines": {
+    "bun": ">=1.0.0",
+    "node": ">=22.18.0"
+  },
+  "packageManager": "bun@1.3.14"
+}

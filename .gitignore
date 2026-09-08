@@ -92,3 +92,12 @@ sketch
 
 #Ignore vscode AI rules
 .github/instructions/codacy.instructions.md
+
+# Node / Bun
+dist/
+*.tsbuildinfo
+coverage/
+.nyc_output/
+.oxlintcache
+eslintReport.html
+oxlint-report.*

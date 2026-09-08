@@ -1,0 +1,6 @@
+{
+  ".": {
+    "release-type": "node",
+    "package-name": "@gv-tech/oxc-config"
+  }
+}

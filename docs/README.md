@@ -1,40 +1,58 @@
 # Documentation
 
-Welcome to the documentation for this template repository. This directory contains all the essential documentation for understanding the project structure, contributing guidelines, and development workflows.
+Documentation for `@gv-tech/oxc-config` follows the
+[Diátaxis](https://diataxis.fr/) framework: four quadrants, each
+answering a different need.
 
-## Documentation Structure
+## Tutorials — learn by doing
 
-This `docs` directory is organized as follows:
+Start here if Oxc is new to you. Hands-on, step-by-step lessons.
 
-- **[BRANCHING.md](BRANCHING.md)** - Branching strategy and workflow guidelines
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines for developers
-- **README.md** (this file) - Overview of the documentation structure
+- [Getting Started](tutorials/getting-started.md) — add shared linting
+  and formatting to a TypeScript project.
 
-## Quick Links
+## How-to guides — accomplish a task
 
-- [Main README](../README.md) - Project overview and getting started
-- [Security Policy](../SECURITY.md) - Security reporting guidelines
-- [License](../LICENSE) - Project license information
+Task-oriented recipes. Each solves one problem.
 
-## Using This Template
+- [Use the Vite preset](how-to/use-vite-preset.md)
+- [Use the Next.js preset](how-to/use-next-preset.md)
+- [Override rules and options](how-to/override-rules.md)
+- [Configure Oxfmt](how-to/configure-oxfmt.md)
+- [Enable type-aware linting](how-to/enable-type-aware.md)
+- [Migrate from ESLint + Prettier](how-to/migrate-from-eslint-prettier.md)
 
-This is a template repository designed to provide a solid foundation for new GitHub projects. It includes:
+## Reference — look up facts
 
-- Standard documentation structure
-- Branching and workflow guidelines
-- Security policy templates
-- GitHub configuration files
+Information-oriented, exact and complete.
 
-## Contributing
+- [Presets](reference/presets.md) — every export and its composition.
+- [Oxfmt options](reference/oxfmt-options.md) — every option and default.
+- [Ignore patterns](reference/ignores.md) — ignore lists and file patterns.
 
-Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for detailed information on how to contribute to this project, including our branching strategy and code review process.
+## Explanation — understand the why
 
-## Diagrams and Documentation Conventions
+Background, reasoning, and trade-offs.
 
-- Use Mermaid charts for visualizing workflows, architecture, and processes
-- Mermaid is supported in GitHub markdown and keeps diagrams source-controlled
-- Example diagrams can be found in [BRANCHING.md](BRANCHING.md)
+- [Design philosophy](explanation/design-philosophy.md)
+- [Vite vs Next](explanation/vite-vs-next.md)
+- [Prettier parity](explanation/prettier-parity.md)
+
+## Project processes
+
+- [Contributing](CONTRIBUTING.md) — development workflow, code review.
+- [Branching strategy](BRANCHING.md) — `main`/`develop` model and releases.
+- [Security policy](../SECURITY.md) — reporting vulnerabilities.
+- [Main README](../README.md) — package overview and quick start.
+
+## Conventions
+
+- Use Mermaid charts for workflows and architecture (GitHub renders
+  them; examples in [BRANCHING.md](BRANCHING.md)).
+- Tutorials teach, how-tos solve, reference states, explanation
+  discusses — keep each page in its quadrant and cross-link instead of
+  duplicating.
 
 ## Questions or Feedback?
 
-If you have questions about the documentation or suggestions for improvement, please open an issue in the repository.
+Open an issue in the repository.

@@ -18,15 +18,15 @@ Thank you for your interest in contributing to this project! This guide will hel
    - Click the "Fork" button at the top right of the repository page
 
 2. **Clone your fork**
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/template.git
-   cd template
-   ```
+    ```bash
+    git clone https://github.com/YOUR-USERNAME/oxc-config.git
+    cd oxc-config
+    ```
 
 3. **Add the upstream remote**
-   ```bash
-   git remote add upstream https://github.com/eng618/template.git
-   ```
+    ```bash
+    git remote add upstream https://github.com/Garcia-Ventures/oxc-config.git
+    ```
 
 4. **Keep your fork synchronized**
    ```bash
@@ -42,13 +42,17 @@ We follow a Git Flow-inspired workflow. Please read our [Branching Strategy](BRA
 ### Quick Workflow Summary
 
 1. Create a feature branch from `develop`
-2. Make your changes
-3. Test your changes
+2. Make your changes (`bun run build` to compile `src/` → `dist/`)
+3. Test your changes (`bun run lint`, `bun run format:ci`, `bun run test`)
 4. Commit with clear messages
 5. Push to your fork
 6. Create a Pull Request to `develop`
 7. Address review feedback
 8. Celebrate when your PR is merged! 🎉
+
+> This repo dogfoods itself: root `oxlint.config.ts` extends `./dist/index.js`
+> and `oxfmt.config.ts` re-exports `./dist/oxfmt.js`. Run `bun run format`
+> before pushing.
 
 ## Code Standards
 
