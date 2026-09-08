@@ -292,6 +292,16 @@ If you have questions about contributing, feel free to:
 - Reach out to the maintainers
 - Check existing documentation and issues first
 
+## Releases
+
+Releases are fully automated with release-please (conventional commits
+→ version-bump PR → GitHub release → staged npm publish):
+
+- Never edit `CHANGELOG.md` or `package.json` versions by hand —
+  release-please owns both.
+- Never commit `CHANGELOG.md` on its own: it is excluded from Oxfmt so
+  release-please's generated style passes CI untouched.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the same license as the project (see [LICENSE](../LICENSE)).

@@ -52,8 +52,14 @@ assert.ok(oxfmtConfig.sortTailwindcss, 'sortTailwindcss enabled');
 // Formatter ignores must never swallow source/config/workflow/docs files,
 // otherwise tools like lint-staged fail when every staged file is ignored.
 assert.deepEqual(oxfmtConfig.ignorePatterns, formatIgnores, 'oxfmt uses formatIgnores');
-for (const forbidden of ['workflows', 'README', 'CHANGELOG', 'LICENSE', 'CONTRIBUTING', 'vite.config', 'tsconfig']) {
+for (const forbidden of ['workflows', 'README', 'LICENSE', 'CONTRIBUTING', 'vite.config', 'tsconfig']) {
   assert.ok(!formatIgnores.some((p) => p.includes(forbidden)), `formatIgnores must not contain ${forbidden}`);
 }
+// Exception: release-please owns CHANGELOG.md and regenerates it in its own
+// style, so the formatter must yield (otherwise every release PR fails CI).
+assert.ok(
+  formatIgnores.some((p) => p.includes('CHANGELOG')),
+  'formatIgnores must exclude release-please CHANGELOG.md',
+);
 
 console.log('All @gv-tech/oxc-config smoke tests passed.');
