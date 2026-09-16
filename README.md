@@ -135,28 +135,28 @@ export default defineConfig({
 
 ## Available presets
 
-| Export | Description |
-|---|---|
-| `@gv-tech/oxc-config` | `recommended` (default export) |
-| `@gv-tech/oxc-config/base` | Core JS rules, `eslint`/`unicorn`/`oxc` plugins |
-| `@gv-tech/oxc-config/typescript` | `base` + `typescript`/`import` plugins |
-| `@gv-tech/oxc-config/react` | `typescript` + `react`/`jsx-a11y` |
-| `@gv-tech/oxc-config/vite` | `react` + `vitest`, browser/node envs, test overrides |
-| `@gv-tech/oxc-config/next` | `react` + `nextjs` plugin, Next.js ignores |
-| `@gv-tech/oxc-config/recommended` | Vite-oriented default (base → ts → react → vite-light) |
-| `@gv-tech/oxc-config/type-aware` | Opt-in `oxlint-tsgolint` rules (extends any preset) |
-| `@gv-tech/oxc-config/oxfmt` | Shared Oxfmt config (`oxfmtConfig`) |
-| `@gv-tech/oxc-config/ignores` | `commonIgnores`, `viteIgnores`, `nextIgnores`, file patterns |
+| Export                            | Description                                                                   |
+| --------------------------------- | ----------------------------------------------------------------------------- |
+| `@gv-tech/oxc-config`             | `recommended` (default export)                                                |
+| `@gv-tech/oxc-config/base`        | Core JS rules, `eslint`/`unicorn`/`oxc` plugins                               |
+| `@gv-tech/oxc-config/typescript`  | `base` + `typescript`/`import` plugins                                        |
+| `@gv-tech/oxc-config/react`       | `typescript` + `react`/`jsx-a11y`                                             |
+| `@gv-tech/oxc-config/vite`        | `react` + `vitest`, browser/node envs, test overrides                         |
+| `@gv-tech/oxc-config/next`        | `react` + `nextjs` plugin, Next.js ignores                                    |
+| `@gv-tech/oxc-config/recommended` | Vite-oriented default (base → ts → react → vite-light)                        |
+| `@gv-tech/oxc-config/type-aware`  | Opt-in `oxlint-tsgolint` rules (extends any preset)                           |
+| `@gv-tech/oxc-config/oxfmt`       | Shared Oxfmt config (`oxfmtConfig`)                                           |
+| `@gv-tech/oxc-config/ignores`     | `commonIgnores`, `viteIgnores`, `nextIgnores`, `formatIgnores`, file patterns |
 
 ## `vite` vs `next` — which preset?
 
-| | `vite` | `next` |
-|---|---|---|
-| Use for | Vite SPAs, libraries, non-Next React apps | Next.js App/Pages Router apps |
-| Extra plugin | `vitest` (+ `jest` in tests) | `nextjs` |
-| Env | browser + node | browser + node |
-| Ignores | `dist`, `coverage`, `playwright-report` | `.next`, `out`, `next-env.d.ts` |
-| Test overrides | Vitest globals, relaxed `any`/`console` | Jest, relaxed `any`/`console` |
+|                | `vite`                                    | `next`                          |
+| -------------- | ----------------------------------------- | ------------------------------- |
+| Use for        | Vite SPAs, libraries, non-Next React apps | Next.js App/Pages Router apps   |
+| Extra plugin   | `vitest` (+ `jest` in tests)              | `nextjs`                        |
+| Env            | browser + node                            | browser + node                  |
+| Ignores        | `dist`, `coverage`, `playwright-report`   | `.next`, `out`, `next-env.d.ts` |
+| Test overrides | Vitest globals, relaxed `any`/`console`   | Jest, relaxed `any`/`console`   |
 
 Rule of thumb: Next.js project → `next`. Everything else React → `vite` (or `recommended`, which is `vite`-light). Plain TS, no React → `typescript`.
 

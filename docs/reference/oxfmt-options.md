@@ -37,5 +37,5 @@ Disable any feature per project by setting it to `false`
 
 ## Ignores and overrides
 
-- `ignorePatterns`: `commonIgnores` (see [ignores](ignores.md)).
+- `ignorePatterns`: `formatIgnores` (see [ignores](ignores.md)).
 - `overrides`: `*.yml` / `*.yaml` use `singleQuote: false`.

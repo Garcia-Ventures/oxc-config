@@ -5,7 +5,7 @@
  */
 
 import { base } from './base.js';
-import { allJsTsFiles, commonIgnores, jsFiles, nextIgnores, tsFiles, viteIgnores } from './ignores.js';
+import { allJsTsFiles, commonIgnores, formatIgnores, jsFiles, nextIgnores, tsFiles, viteIgnores } from './ignores.js';
 import { next } from './next.js';
 import { oxfmtConfig } from './oxfmt.js';
 import { react } from './react.js';
@@ -19,6 +19,7 @@ export {
   allJsTsFiles,
   base,
   commonIgnores,
+  formatIgnores,
   jsFiles,
   next,
   nextIgnores,

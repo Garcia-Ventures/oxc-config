@@ -22,7 +22,7 @@
  * - `curly/multiline-arrays` have no Oxfmt option (core formatter covers it)
  */
 
-import { commonIgnores } from './ignores.js';
+import { formatIgnores } from './ignores.js';
 import type { OxfmtConfig } from './types.js';
 
 export const oxfmtConfig: OxfmtConfig = {
@@ -47,7 +47,7 @@ export const oxfmtConfig: OxfmtConfig = {
     functions: ['clsx', 'cn', 'cva', 'tw'],
   },
   jsdoc: true,
-  ignorePatterns: commonIgnores,
+  ignorePatterns: formatIgnores,
   overrides: [
     {
       files: ['*.yml', '*.yaml'],

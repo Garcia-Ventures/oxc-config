@@ -5,18 +5,18 @@
 
 ## Exports
 
-| Subpath         | Named export                                                                        | Extends                 |
-| --------------- | ----------------------------------------------------------------------------------- | ----------------------- |
-| `.`             | `recommended` (default)                                                             | `vite`                  |
-| `./base`        | `base`                                                                              | —                       |
-| `./typescript`  | `typescript`                                                                        | `base`                  |
-| `./react`       | `react`                                                                             | `typescript`            |
-| `./vite`        | `vite`                                                                              | `react`                 |
-| `./next`        | `next` (+ `nextjs` alias on `.`)                                                    | `react`                 |
-| `./recommended` | `recommended`                                                                       | `vite`                  |
-| `./type-aware`  | `typeAware`                                                                         | — (additive, goes last) |
-| `./oxfmt`       | `oxfmtConfig`                                                                       | —                       |
-| `./ignores`     | `commonIgnores`, `viteIgnores`, `nextIgnores`, `jsFiles`, `tsFiles`, `allJsTsFiles` | —                       |
+| Subpath         | Named export                                                                                         | Extends                 |
+| --------------- | ---------------------------------------------------------------------------------------------------- | ----------------------- |
+| `.`             | `recommended` (default)                                                                              | `vite`                  |
+| `./base`        | `base`                                                                                               | —                       |
+| `./typescript`  | `typescript`                                                                                         | `base`                  |
+| `./react`       | `react`                                                                                              | `typescript`            |
+| `./vite`        | `vite`                                                                                               | `react`                 |
+| `./next`        | `next` (+ `nextjs` alias on `.`)                                                                     | `react`                 |
+| `./recommended` | `recommended`                                                                                        | `vite`                  |
+| `./type-aware`  | `typeAware`                                                                                          | — (additive, goes last) |
+| `./oxfmt`       | `oxfmtConfig`                                                                                        | —                       |
+| `./ignores`     | `commonIgnores`, `viteIgnores`, `nextIgnores`, `formatIgnores`, `jsFiles`, `tsFiles`, `allJsTsFiles` | —                       |
 
 ## `base`
 

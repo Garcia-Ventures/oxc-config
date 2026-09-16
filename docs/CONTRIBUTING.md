@@ -18,15 +18,17 @@ Thank you for your interest in contributing to this project! This guide will hel
    - Click the "Fork" button at the top right of the repository page
 
 2. **Clone your fork**
-    ```bash
-    git clone https://github.com/YOUR-USERNAME/oxc-config.git
-    cd oxc-config
-    ```
+
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/oxc-config.git
+   cd oxc-config
+   ```
 
 3. **Add the upstream remote**
-    ```bash
-    git remote add upstream https://github.com/Garcia-Ventures/oxc-config.git
-    ```
+
+   ```bash
+   git remote add upstream https://github.com/Garcia-Ventures/oxc-config.git
+   ```
 
 4. **Keep your fork synchronized**
    ```bash
@@ -119,6 +121,7 @@ chore(deps): update dependencies to latest versions
 ### Before Submitting
 
 1. **Update your branch**
+
    ```bash
    git checkout develop
    git pull upstream develop
@@ -138,6 +141,7 @@ chore(deps): update dependencies to latest versions
 ### Submitting a Pull Request
 
 1. **Push your branch**
+
    ```bash
    git push origin your-feature-branch
    ```
@@ -287,6 +291,16 @@ If you have questions about contributing, feel free to:
 - Open an issue with the `question` label
 - Reach out to the maintainers
 - Check existing documentation and issues first
+
+## Releases
+
+Releases are fully automated with release-please (conventional commits
+→ version-bump PR → GitHub release → staged npm publish):
+
+- Never edit `CHANGELOG.md` or `package.json` versions by hand —
+  release-please owns both.
+- Never commit `CHANGELOG.md` on its own: it is excluded from Oxfmt so
+  release-please's generated style passes CI untouched.
 
 ## License
 
