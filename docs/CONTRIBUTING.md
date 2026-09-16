@@ -305,6 +305,11 @@ Releases are fully automated with release-please (conventional commits
   release-please owns both.
 - Never commit `CHANGELOG.md` on its own: it is excluded from Oxfmt so
   release-please's generated style passes CI untouched.
+- All conventional commit types (`feat`, `fix`, `perf`, `build`, `chore`,
+  `ci`, `docs`, `refactor`, `revert`, `style`, `test`) trigger releases and
+  appear in the changelog — configured via `changelog-sections` in
+  `release-please-config.json`. `feat` bumps minor, breaking changes bump
+  major, everything else bumps patch.
 
 ## License
 
