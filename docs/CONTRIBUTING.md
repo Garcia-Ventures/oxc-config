@@ -46,6 +46,10 @@ We follow a Git Flow-inspired workflow. Please read our [Branching Strategy](BRA
 1. Create a feature branch from `develop`
 2. Make your changes (`bun run build` to compile `src/` → `dist/`)
 3. Test your changes (`bun run lint`, `bun run format:ci`, `bun run test`)
+   - `bun run test` builds on TypeScript 7, runs the smoke test, then
+     typechecks `test/compat-ts6` with TypeScript 6 (`tsc6`) to prove the
+     emitted `dist/*.d.ts` stays readable by TS 6 consumers
+     (run that check alone with `bun run compat:ts6`).
 4. Commit with clear messages
 5. Push to your fork
 6. Create a Pull Request to `develop`

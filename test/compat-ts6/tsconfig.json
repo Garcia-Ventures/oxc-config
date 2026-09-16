@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  // TS 6 consumer check: proves dist/*.d.ts emitted by TS 7 is readable by TS 6.
+  // skipLibCheck:false is intentional — it forces tsc6 to fully parse our .d.ts.
+  // Run via repo script: `bun run compat:ts6` (uses tsc6 from @typescript/typescript6).
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "skipLibCheck": false,
+    "noEmit": true,
+    "types": [],
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true
+  },
+  "include": ["consume.ts"]
+}

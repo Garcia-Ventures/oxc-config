@@ -28,3 +28,17 @@ jobs:
       - run: bun run lint
       - run: bun run format:ci
       - run: bun run test
+  compat-ts6:
+    name: TS6 compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      # Build with TS 7, then typecheck dist/ with TS 6 (tsc6).
+      # Fails if TS 7 declaration emit is unreadable by TS 6 consumers.
+      - run: bun run build
+      - run: bun run compat:ts6

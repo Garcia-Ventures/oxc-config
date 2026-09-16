@@ -15,6 +15,7 @@ Shareable [Oxlint](https://oxc.rs/docs/guide/usage/linter) + [Oxfmt](https://oxc
 
 - Node.js `>=22.18.0` (required for `oxlint.config.ts` / `oxfmt.config.ts`)
 - `oxlint` `>=1.0.0` and/or `oxfmt` `>=0.9.0`
+- `typescript` `>=6.0.0` (optional peer; the package builds on TypeScript 7 and its types are verified against TypeScript 6 — see `test/compat-ts6`)
 
 ## Installation
 
@@ -25,7 +26,7 @@ npm i -D @gv-tech/oxc-config oxlint oxfmt
 # bun:   bun add -d @gv-tech/oxc-config oxlint oxfmt
 ```
 
-TypeScript projects also need `typescript >= 5`. Type-aware linting additionally needs `oxlint-tsgolint`:
+TypeScript projects also need `typescript >= 6`. Type-aware linting additionally needs `oxlint-tsgolint`:
 
 ```sh
 npm i -D typescript oxlint-tsgolint

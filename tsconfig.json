@@ -15,7 +15,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    // TS 7 defaults `types` to `[]` (TS 6 included all `@types/*`).
+    // Set explicitly so both compilers resolve globals identically.
+    // This package uses no `@types/*` globals.
+    "types": []
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "fixtures", "test"]

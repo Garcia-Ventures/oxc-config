@@ -81,17 +81,19 @@
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "clean": "rm -rf dist",
+    "compat:ts6": "tsc6 --noEmit --project test/compat-ts6/tsconfig.json",
     "format": "oxfmt --write .",
     "format:ci": "oxfmt --check .",
     "lint": "oxlint .",
     "lint:fix": "bun run lint --fix",
     "prepack": "bun run build",
     "prepare": "husky",
-    "test": "bun run build && node test/verify.mjs",
+    "test": "bun run build && node test/verify.mjs && bun run compat:ts6",
     "validate": "bun run build && bun run lint && bun run format:ci && bun run test && bun x publint --pack bun"
   },
   "dependencies": {},
   "devDependencies": {
+    "@typescript/typescript6": "^6.0.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.5.1",
     "oxfmt": "^0.68.0",
@@ -102,7 +104,7 @@
   "peerDependencies": {
     "oxfmt": ">=0.68.0",
     "oxlint": ">=1.83.0",
-    "typescript": ">=5.0.0"
+    "typescript": ">=6.0.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
