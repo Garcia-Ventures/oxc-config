@@ -39,7 +39,13 @@ jobs:
       # No NODE_AUTH_TOKEN / NPM_TOKEN needed or allowed here.
       id-token: write
     steps:
+      # Check out the exact tag release-please just created (e.g.
+      # oxc-config-v1.1.1). Checking out the default ref can publish a
+      # stale version on re-runs, which fails with "You cannot publish
+      # over the previously published versions".
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.tag_name }}
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
@@ -51,6 +57,23 @@ jobs:
       - run: npm install -g npm@latest
       - run: bun install --frozen-lockfile
       - run: bun run build
+      # Skip gracefully if this version is already on npm (e.g. a
+      # re-run after a successful publish). Re-publishing fails with
+      # "You cannot publish over the previously published versions".
+      - name: Skip if version already published
+        id: already_published
+        run: |
+          PKG_NAME=$(node -p "require('./package.json').name")
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          echo "Checking $PKG_NAME@$PKG_VERSION on npm..."
+          if npm view "$PKG_NAME@$PKG_VERSION" version --silent >/dev/null 2>&1; then
+            echo "already=true" >> "$GITHUB_OUTPUT"
+            echo "$PKG_NAME@$PKG_VERSION is already published — skipping."
+          else
+            echo "already=false" >> "$GITHUB_OUTPUT"
+            echo "$PKG_NAME@$PKG_VERSION is not on npm — will publish."
+          fi
       # Stage-only trusted publisher: CI submits to the stage queue;
       # a maintainer approves with 2FA before it goes live.
       - run: npm stage publish --access public
+        if: steps.already_published.outputs.already != 'true'
