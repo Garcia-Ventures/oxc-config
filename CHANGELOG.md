@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.1.1...oxc-config-v1.1.2) (2026-10-05)
+
+
+### Continuous Integration
+
+* gracefully stop if version already published ([cc3fbb1](https://github.com/Garcia-Ventures/oxc-config/commit/cc3fbb10bb3c1111f38a8858ac6794fe71820a72))
+
 ## [1.1.1](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.1.0...oxc-config-v1.1.1) (2026-10-05)
 
 
