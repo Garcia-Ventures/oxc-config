@@ -38,7 +38,7 @@ export const next: OxlintConfig = {
       plugins: ['jest'],
       rules: {
         'typescript/no-explicit-any': 'off',
-        'eslint/no-console': 'off',
+        'no-console': 'off',
       },
     },
   ],

@@ -9,7 +9,7 @@ Shareable [Oxlint](https://oxc.rs/docs/guide/usage/linter) + [Oxfmt](https://oxc
 - 🔷 **TypeScript-first** — strict-but-adoptable rules mirroring `@gv-tech/eslint-config`
 - ⚛️ **Vite and Next.js** — dedicated presets with framework-specific plugins and ignores
 - 💅 **Prettier-compatible style** — Oxfmt defaults mirror `@eng618/prettier-config` (120 cols, single quotes, trailing commas, sorted imports/package.json/Tailwind)
-- 🛡️ **Type-safe** — full TypeScript types, `defineConfig` consumption
+- 🛡️ **Type-safe** — presets are typed with the real upstream `oxlint`/`oxfmt` config types, so `defineConfig` consumption needs no casts
 
 ## Requirements
 
@@ -112,11 +112,11 @@ import { vite } from '@gv-tech/oxc-config/vite';
 
 export default defineConfig({
   extends: [vite],
-  rules: { 'eslint/no-console': 'off' },
+  rules: { 'no-console': 'off' },
   overrides: [
     {
       files: ['scripts/**/*'],
-      rules: { 'eslint/no-console': 'off' },
+      rules: { 'no-console': 'off' },
     },
   ],
 });

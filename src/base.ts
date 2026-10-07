@@ -33,14 +33,17 @@ export const base: OxlintConfig = {
   },
   ignorePatterns: commonIgnores,
   rules: {
-    // Mirror eslint-config base: unused imports are errors, unused vars warn with _ prefix
+    // Mirror eslint-config base: unused imports are errors, unused vars warn with _ prefix.
+    // NOTE: core rules use unprefixed names upstream (`no-console`, not
+    // `eslint/no-console`) — canonical names get precise types and IDE
+    // completion; both forms behave identically at runtime.
     'eslint/no-unused-vars': 'off',
     'unicorn/prefer-node-protocol': 'warn',
-    'eslint/no-console': 'warn',
-    'eslint/no-debugger': 'deny',
-    'eslint/eqeqeq': ['warn', 'always'],
-    'eslint/no-var': 'deny',
-    'eslint/prefer-const': 'warn',
+    'no-console': 'warn',
+    'no-debugger': 'deny',
+    eqeqeq: ['warn', 'always'],
+    'no-var': 'deny',
+    'prefer-const': 'warn',
     'oxc/only-used-in-recursion': 'warn',
   },
 };

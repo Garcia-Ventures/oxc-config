@@ -26,14 +26,14 @@ export const vite: OxlintConfig = {
       rules: {
         'typescript/no-explicit-any': 'off',
         'typescript/no-non-null-assertion': 'off',
-        'eslint/no-console': 'off',
+        'no-console': 'off',
       },
     },
     {
       files: ['vite.config.*', 'vitest.config.*', 'vitest.workspace.*'],
       rules: {
         'import/no-default-export': 'off',
-        'eslint/no-console': 'off',
+        'no-console': 'off',
       },
     },
   ],

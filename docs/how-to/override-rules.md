@@ -13,9 +13,14 @@ import { vite } from '@gv-tech/oxc-config/vite';
 
 export default defineConfig({
   extends: [vite],
-  rules: { 'eslint/no-console': 'off' },
+  rules: { 'no-console': 'off' },
 });
 ```
+
+> Use upstream canonical rule names: core rules are unprefixed
+> (`no-console`, `eqeqeq`, `prefer-const` — not `eslint/no-console`).
+> Both forms work at runtime, but only canonical names get precise
+> types and IDE completion.
 
 ## Oxlint: scope overrides to file patterns
 
@@ -25,7 +30,7 @@ export default defineConfig({
   overrides: [
     {
       files: ['scripts/**/*'],
-      rules: { 'eslint/no-console': 'off' },
+      rules: { 'no-console': 'off' },
     },
   ],
 });

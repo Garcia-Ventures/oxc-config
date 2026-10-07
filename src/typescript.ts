@@ -17,9 +17,10 @@ export const typescript: OxlintConfig = {
     {
       files: tsFiles,
       rules: {
-        'eslint/no-unused-vars': 'off',
+        // Single entry: oxlint resolves `eslint/no-unused-vars` for TS files
+        // (there is no separate `typescript/no-unused-vars` upstream).
+        'eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
         'typescript/no-explicit-any': 'warn',
-        'typescript/no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
         'typescript/consistent-type-imports': 'warn',
         'typescript/no-non-null-assertion': 'warn',
         'import/no-cycle': 'warn',

@@ -94,7 +94,8 @@
     "lint:fix": "bun run lint --fix",
     "prepack": "bun run build",
     "prepare": "husky",
-    "test": "bun run build && node test/verify.mjs && bun run compat:ts6",
+    "test": "bun run build && node test/verify.mjs && bun run test:types && bun run compat:ts6",
+    "test:types": "tsc --noEmit --project test/downstream/tsconfig.json",
     "validate": "bun run build && bun run lint && bun run format:ci && bun run test && bun x publint --pack bun"
   },
   "dependencies": {},

@@ -24,9 +24,9 @@
 - `plugins`: `eslint`, `unicorn`, `oxc`
 - `env`: `browser`, `node`
 - `rules`: `eslint/no-unused-vars: off`,
-  `unicorn/prefer-node-protocol: warn`, `eslint/no-console: warn`,
-  `eslint/no-debugger: deny`, `eslint/eqeqeq: [warn, always]`,
-  `eslint/no-var: deny`, `eslint/prefer-const: warn`,
+  `unicorn/prefer-node-protocol: warn`, `no-console: warn`,
+  `no-debugger: deny`, `eqeqeq: [warn, always]`,
+  `no-var: deny`, `prefer-const: warn`,
   `oxc/only-used-in-recursion: warn`
 
 ## `typescript`
@@ -34,7 +34,7 @@
 - `plugins`: `eslint`, `typescript`, `import`, `unicorn`, `oxc`
 - `overrides` for `**/*.{ts,tsx,mts,cts}`:
   `typescript/no-explicit-any: warn`,
-  `typescript/no-unused-vars: error` (`^_` ignore patterns),
+  `eslint/no-unused-vars: error` (`^_` ignore patterns),
   `typescript/consistent-type-imports: warn`,
   `typescript/no-non-null-assertion: warn`,
   `import/no-cycle: warn`, `import/no-duplicates: warn`

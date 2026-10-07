@@ -1,74 +1,36 @@
 /**
  * @gv-tech/oxc-config - Shared Oxlint/Oxfmt config types
  *
- * Structural types compatible with `defineConfig` from `oxlint` and `oxfmt`.
- * Kept local (not importing `oxlint`/`oxfmt` at type level) so the package
- * has zero runtime dependencies and peers stay optional.
+ * These are the REAL upstream config types (`oxlint`, `oxfmt`), re-exported
+ * under their usual names. Every preset in this package is annotated with
+ * them, so downstream `defineConfig` consumption typechecks with zero casts:
+ *
+ * ```ts
+ * import { defineConfig } from 'oxlint';
+ * import { vite } from '@gv-tech/oxc-config/vite';
+ * export default defineConfig({ extends: [vite] }); // no cast needed
+ * ```
+ *
+ * `import type` is fully erased at build time, so the package keeps zero
+ * runtime dependencies. (`oxlint`/`oxfmt` are mandatory peers; only
+ * `typescript` is an optional peer.)
  */
 
-/** ESLint-style severity accepted by Oxlint */
+export type { OxlintConfig, OxlintEnv, OxlintGlobals, OxlintOverride } from 'oxlint';
+export type { OxfmtConfig, OxfmtOverrideConfig as OxfmtOverride } from 'oxfmt';
+
+/**
+ * Rule severity accepted by Oxlint.
+ *
+ * @deprecated Import `AllowWarnDeny` from `oxlint` instead. Kept for
+ * backwards compatibility; note upstream also accepts `number`.
+ */
 export type OxlintSeverity = 'off' | 'allow' | 'warn' | 'error' | 'deny';
 
-/** A single rule entry: severity or [severity, options] */
+/**
+ * A single rule entry: severity or [severity, options].
+ *
+ * @deprecated Prefer the per-rule types in `oxlint`'s `DummyRuleMap`
+ * (upstream rule options differ per rule). Kept for backwards compatibility.
+ */
 export type OxlintRuleEntry = OxlintSeverity | [OxlintSeverity, ...unknown[]];
-
-/** Per-file override block */
-export interface OxlintOverride {
-  files: string[];
-  excludeFiles?: string[];
-  plugins?: string[];
-  env?: Record<string, boolean>;
-  globals?: Record<string, 'readonly' | 'writable' | 'off' | boolean>;
-  rules?: Record<string, OxlintRuleEntry>;
-}
-
-/** Top-level Oxlint config object (extends-aware) */
-export interface OxlintConfig {
-  $schema?: string;
-  categories?: Record<string, OxlintSeverity>;
-  plugins?: string[];
-  jsPlugins?: Array<string | { name: string; specifier: string }>;
-  env?: Record<string, boolean>;
-  globals?: Record<string, 'readonly' | 'writable' | 'off' | boolean>;
-  settings?: Record<string, unknown>;
-  rules?: Record<string, OxlintRuleEntry>;
-  overrides?: OxlintOverride[];
-  ignorePatterns?: string[];
-  extends?: Array<OxlintConfig | string>;
-}
-
-/** Oxfmt override block */
-export interface OxfmtOverride {
-  files: string[];
-  excludeFiles?: string[];
-  options: OxfmtConfig;
-}
-
-/** Top-level Oxfmt config object */
-export interface OxfmtConfig {
-  $schema?: string;
-  printWidth?: number;
-  tabWidth?: number;
-  useTabs?: boolean;
-  semi?: boolean;
-  singleQuote?: boolean;
-  jsxSingleQuote?: boolean;
-  trailingComma?: 'all' | 'es5' | 'none';
-  bracketSpacing?: boolean;
-  bracketSameLine?: boolean;
-  arrowParens?: 'always' | 'avoid';
-  endOfLine?: 'lf' | 'crlf' | 'cr';
-  insertFinalNewline?: boolean;
-  quoteProps?: 'as-needed' | 'consistent' | 'preserve';
-  objectWrap?: 'preserve' | 'collapse';
-  proseWrap?: 'always' | 'never' | 'preserve';
-  singleAttributePerLine?: boolean;
-  embeddedLanguageFormatting?: 'auto' | 'off';
-  ignorePatterns?: string[];
-  overrides?: OxfmtOverride[];
-  sortImports?: boolean | Record<string, unknown>;
-  sortPackageJson?: boolean | Record<string, unknown>;
-  sortTailwindcss?: boolean | Record<string, unknown>;
-  jsdoc?: boolean | Record<string, unknown>;
-  [key: string]: unknown;
-}
