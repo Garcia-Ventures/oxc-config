@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.1.2...oxc-config-v1.2.0) (2026-10-07)
+
+
+### Features
+
+* bundle a wrapper so the config can be used without install ([dd258f4](https://github.com/Garcia-Ventures/oxc-config/commit/dd258f4d5359a8adb62f46f65d125bb08a082137))
+
 ## [1.1.2](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.1.1...oxc-config-v1.1.2) (2026-10-05)
 
 
