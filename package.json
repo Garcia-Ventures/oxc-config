@@ -24,7 +24,11 @@
     "type": "git",
     "url": "git+https://github.com/Garcia-Ventures/oxc-config.git"
   },
+  "bin": {
+    "gv-oxfmt": "./bin/gv-oxfmt.js"
+  },
   "files": [
+    "bin",
     "dist"
   ],
   "type": "module",
@@ -72,6 +76,7 @@
     "./recommended": "./dist/recommended.js",
     "./type-aware": "./dist/type-aware.js",
     "./oxfmt": "./dist/oxfmt.js",
+    "./oxfmt.json": "./dist/oxfmt.json",
     "./ignores": "./dist/ignores.js"
   },
   "publishConfig": {
@@ -79,7 +84,8 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.json && node scripts/generate-oxfmt-json.mjs",
+    "build:oxfmt-json": "node scripts/generate-oxfmt-json.mjs",
     "clean": "rm -rf dist",
     "compat:ts6": "tsc6 --noEmit --project test/compat-ts6/tsconfig.json",
     "format": "oxfmt --write .",

@@ -185,6 +185,52 @@ VSCode with [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemNa
 }
 ```
 
+## Standalone use (no `package.json`)
+
+Every release publishes a ready-to-use `oxfmt.json` generated from
+`oxfmtConfig`, plus a `gv-oxfmt` runner that bundles it. Ideal for
+formatting repos that don't (or can't) install this package.
+
+> Note: `oxfmt -c` accepts a local file path only, not a URL — so
+> download the JSON first, or use the `gv-oxfmt` wrapper.
+
+### Option A — `gv-oxfmt` wrapper (no download, no config file)
+
+```sh
+npx --yes --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --write .
+npx --yes --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --check .
+```
+
+```sh
+bun x --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --write .
+bun x --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --check .
+```
+
+### Option B — download `oxfmt.json`, then run `oxfmt`
+
+```sh
+curl -fsSL https://cdn.jsdelivr.net/npm/@gv-tech/oxc-config@latest/dist/oxfmt.json -o .oxfmtrc.json
+npx -y oxfmt@latest --write .
+```
+
+```sh
+curl -fsSL https://cdn.jsdelivr.net/npm/@gv-tech/oxc-config@latest/dist/oxfmt.json -o .oxfmtrc.json
+bun x oxfmt@latest --write .
+```
+
+(Unpkg works too:
+`https://unpkg.com/@gv-tech/oxc-config@latest/dist/oxfmt.json`.)
+
+### Option C — reference the JSON inside an installed project
+
+```sh
+npx oxfmt -c ./node_modules/@gv-tech/oxc-config/dist/oxfmt.json --write .
+```
+
+```sh
+bun x oxfmt -c ./node_modules/@gv-tech/oxc-config/dist/oxfmt.json --write .
+```
+
 ## Documentation
 
 Full docs follow the [Diátaxis](https://diataxis.fr/) framework in [`docs/`](docs/):

@@ -42,6 +42,40 @@ export default defineConfig({ ...oxfmtConfig, sortTailwindcss: false });
 matching `@eng618/prettier-config`. Override per project via
 `overrides` if needed.
 
+## Standalone use (no `package.json`)
+
+Every release publishes `dist/oxfmt.json` — the same `oxfmtConfig`
+above, serialized — plus a `gv-oxfmt` runner that bundles it.
+
+> `oxfmt -c` accepts a local file path only, not a URL. Download the
+> JSON first, or use the wrapper.
+
+Wrapper (no download, no config file):
+
+```sh
+npx --yes --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --write .
+bun x --package oxfmt --package @gv-tech/oxc-config@latest gv-oxfmt --write .
+```
+
+Download then run:
+
+```sh
+curl -fsSL https://cdn.jsdelivr.net/npm/@gv-tech/oxc-config@latest/dist/oxfmt.json -o .oxfmtrc.json
+npx -y oxfmt@latest --write .
+```
+
+```sh
+curl -fsSL https://cdn.jsdelivr.net/npm/@gv-tech/oxc-config@latest/dist/oxfmt.json -o .oxfmtrc.json
+bun x oxfmt@latest --write .
+```
+
+Reference the JSON inside an installed project:
+
+```sh
+npx oxfmt -c ./node_modules/@gv-tech/oxc-config/dist/oxfmt.json --write .
+bun x oxfmt -c ./node_modules/@gv-tech/oxc-config/dist/oxfmt.json --write .
+```
+
 ## See also
 
 - [Oxfmt options reference](../reference/oxfmt-options.md) — every

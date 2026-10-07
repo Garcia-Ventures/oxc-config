@@ -1,5 +1,6 @@
 // Smoke test: every preset must be a valid config object consumable via `extends`.
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 
 const modules = [
   'base',
@@ -63,3 +64,10 @@ assert.ok(
 );
 
 console.log('All @gv-tech/oxc-config smoke tests passed.');
+
+// Published JSON artifact must round-trip the canonical oxfmtConfig.
+// Guards against drift between src/oxfmt.ts and dist/oxfmt.json.
+const oxfmtJson = JSON.parse(await readFile(new URL('../dist/oxfmt.json', import.meta.url), 'utf8'));
+assert.deepEqual(oxfmtJson, JSON.parse(JSON.stringify(oxfmtConfig)), 'dist/oxfmt.json must match oxfmtConfig');
+
+console.log('oxfmt.json artifact is in sync.');
