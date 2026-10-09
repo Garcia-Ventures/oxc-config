@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.2.0...oxc-config-v1.3.0) (2026-10-09)
+
+
+### Features
+
+* add objectWrap and softened jsdoc configuration options to oxfmt config ([deb9aa9](https://github.com/Garcia-Ventures/oxc-config/commit/deb9aa97025297f9d5d7b70bd5d14ffd695b11cf))
+
+
+### Bug Fixes
+
+* **types:** type presets with upstream oxlint/oxfmt configs ([e94e07f](https://github.com/Garcia-Ventures/oxc-config/commit/e94e07f8de5afdbc2d196511023dd235b81d6830))
+
 ## [1.2.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.1.2...oxc-config-v1.2.0) (2026-10-07)
 
 
