@@ -42,6 +42,42 @@ export default defineConfig({ ...oxfmtConfig, sortTailwindcss: false });
 matching `@eng618/prettier-config`. Override per project via
 `overrides` if needed.
 
+## JSDoc comments
+
+The shared config enables `jsdoc` in softened mode:
+
+```ts
+jsdoc: {
+  capitalizeDescriptions: true,
+  commentLineStrategy: 'keep',
+  lineWrappingStyle: 'balance',
+}
+```
+
+`balance` preserves your intentional `Usage:` / `Flags:` / `Examples:`
+line breaks when they fit in `printWidth: 120` (verified idempotent:
+`--write` then `--check` passes in one pass). Per project:
+
+```ts
+// Aggressive (upstream defaults): always re-wrap
+export default defineConfig({ ...oxfmtConfig, jsdoc: true });
+// Off (Prettier-like, comments untouched):
+export default defineConfig({ ...oxfmtConfig, jsdoc: false });
+```
+
+## JSON arrays
+
+No `arrayWrap` option exists upstream, so one-per-line lists pack to
+`printWidth`. To keep data files vertical per project, lower the width
+for JSON or ignore generated files:
+
+```ts
+export default defineConfig({
+  ...oxfmtConfig,
+  overrides: [...(oxfmtConfig.overrides ?? []), { files: ['*.json', '*.jsonc'], options: { printWidth: 80 } }],
+});
+```
+
 ## Standalone use (no `package.json`)
 
 Every release publishes `dist/oxfmt.json` — the same `oxfmtConfig`

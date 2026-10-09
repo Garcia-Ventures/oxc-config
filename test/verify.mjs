@@ -46,9 +46,16 @@ assert.equal(oxfmtConfig.useTabs, false);
 assert.equal(oxfmtConfig.endOfLine, 'lf');
 assert.equal(oxfmtConfig.arrowParens, 'always');
 assert.equal(oxfmtConfig.bracketSpacing, true);
+assert.equal(oxfmtConfig.objectWrap, 'preserve');
 assert.ok(oxfmtConfig.sortImports, 'sortImports enabled');
 assert.ok(oxfmtConfig.sortPackageJson, 'sortPackageJson enabled');
 assert.ok(oxfmtConfig.sortTailwindcss, 'sortTailwindcss enabled');
+// JSDoc is softened (not `true`): `balance` + `keep` preserve intentional
+// `Usage:` / `Flags:` line breaks while keeping capitalization on.
+assert.equal(typeof oxfmtConfig.jsdoc, 'object', 'jsdoc should be an object');
+assert.equal(oxfmtConfig.jsdoc.lineWrappingStyle, 'balance');
+assert.equal(oxfmtConfig.jsdoc.commentLineStrategy, 'keep');
+assert.equal(oxfmtConfig.jsdoc.capitalizeDescriptions, true);
 
 // Formatter ignores must never swallow source/config/workflow/docs files,
 // otherwise tools like lint-staged fail when every staged file is ignored.

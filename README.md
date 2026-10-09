@@ -165,9 +165,9 @@ Rule of thumb: Next.js project → `next`. Everything else React → `vite` (or 
 
 Mirrors [`@eng618/prettier-config`](https://github.com/eng618/prettier-config):
 
-`printWidth: 120`, `singleQuote: true`, `trailingComma: "all"`, `tabWidth: 2`, `useTabs: false`, `endOfLine: "lf"`, `arrowParens: "always"`, `bracketSpacing: true` — plus built-ins that replace Prettier plugins: `sortImports`, `sortPackageJson` (`sortScripts`), `sortTailwindcss` (`clsx/cn/cva/tw`), `jsdoc`, and a `*.yml/*.yaml` override (`singleQuote: false`).
+`printWidth: 120`, `singleQuote: true`, `trailingComma: "all"`, `tabWidth: 2`, `useTabs: false`, `endOfLine: "lf"`, `arrowParens: "always"`, `bracketSpacing: true`, `objectWrap: "preserve"` — plus built-ins that replace Prettier plugins: `sortImports`, `sortPackageJson` (`sortScripts`), `sortTailwindcss` (`clsx/cn/cva/tw`), `jsdoc` (softened: `balance` + `keep`, caps on), and a `*.yml/*.yaml` override (`singleQuote: false`).
 
-Known gaps (no Oxfmt equivalent): `curly`/`multiline-arrays` enforcement (covered by the core formatter) and `requirePragma` for `CHANGELOG.md`.
+Known gaps (no Oxfmt equivalent): `curly` enforcement (covered by the core formatter), `multiline-arrays`/`arrayWrap` (arrays fill-pack to `printWidth`; see Oxfmt options ref for per-project workarounds) and `requirePragma` for `CHANGELOG.md`.
 
 ## Editor setup
 

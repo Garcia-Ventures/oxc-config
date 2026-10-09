@@ -11,16 +11,17 @@ tabs, LF endings, `arrowParens: "always"`, `bracketSpacing` — all map
 
 ## Plugins become built-ins
 
-| Prettier plugin                | Oxfmt equivalent        | Status                                     |
-| ------------------------------ | ----------------------- | ------------------------------------------ |
-| `organize-imports`             | `sortImports`           | ✅ enabled                                 |
-| `packagejson`                  | `sortPackageJson`       | ✅ enabled (`sortScripts`)                 |
-| `tailwindcss`                  | `sortTailwindcss`       | ✅ enabled (`clsx/cn/cva/tw`)              |
-| `jsdoc`                        | `jsdoc`                 | ✅ enabled                                 |
-| `sh`, `sql`, `prisma`          | native language support | ✅ no config needed                        |
-| `curly`, `multiline-arrays`    | —                       | ➖ no equivalent; core formatter covers it |
-| `*.hbs → html` parser override | —                       | ➖ no equivalent                           |
-| `CHANGELOG.md requirePragma`   | —                       | ➖ no equivalent                           |
+| Prettier plugin                  | Oxfmt equivalent        | Status                                                                               |
+| -------------------------------- | ----------------------- | ------------------------------------------------------------------------------------ |
+| `organize-imports`               | `sortImports`           | ✅ enabled                                                                           |
+| `packagejson`                    | `sortPackageJson`       | ✅ enabled (`sortScripts`)                                                           |
+| `tailwindcss`                    | `sortTailwindcss`       | ✅ enabled (`clsx/cn/cva/tw`)                                                        |
+| `jsdoc`                          | `jsdoc`                 | ✅ enabled (softened: `balance` + `keep`, caps on)                                   |
+| `sh`, `sql`, `prisma`            | native language support | ✅ no config needed                                                                  |
+| `curly`                          | —                       | ➖ no equivalent; core formatter covers it                                           |
+| `multiline-arrays` (`arrayWrap`) | —                       | ➖ no equivalent; fill-packs to `printWidth` (see Oxfmt options ref for workarounds) |
+| `*.hbs → html` parser override   | —                       | ➖ no equivalent                                                                     |
+| `CHANGELOG.md requirePragma`     | —                       | ➖ no equivalent                                                                     |
 
 The `*.yml`/`*.yaml` override (`singleQuote: false`) is preserved.
 
