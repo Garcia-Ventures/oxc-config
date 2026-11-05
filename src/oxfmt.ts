@@ -19,7 +19,8 @@
  * - `sortTailwindcss` replaces `prettier-plugin-tailwindcss`
  * - `jsdoc` replaces `prettier-plugin-jsdoc` (softened: `balance` +
  *   `keep` so intentional `Usage:` / `Flags:` line breaks survive;
- *   capitalization stays on)
+ *   capitalization stays on; tag groups separated, code fences preferred,
+ *   bracket spacing enabled)
  * - `sh/sql/prisma` need no plugin: Oxfmt formats them natively
  * - `curly` has no Oxfmt option (core formatter covers it)
  * - arrays (incl. JSON) have no `arrayWrap` option upstream yet: Prettier
@@ -56,10 +57,16 @@ export const oxfmtConfig: OxfmtConfig = {
   // preserves intentional line breaks (e.g. `Usage:` / `Flags:` / `Examples:`
   // headers in scripts) when they fit in `printWidth`, `keep` preserves the
   // author's single- vs multi-line choice. Capitalization stays enabled.
+  // Group separation, code fences, bracket spacing, and unparseable example
+  // indentation are enabled for clean, readable documentation.
   jsdoc: {
+    bracketSpacing: true,
     capitalizeDescriptions: true,
     commentLineStrategy: 'keep',
+    keepUnparsableExampleIndent: true,
     lineWrappingStyle: 'balance',
+    preferCodeFences: true,
+    separateTagGroups: true,
   },
   ignorePatterns: formatIgnores,
   overrides: [

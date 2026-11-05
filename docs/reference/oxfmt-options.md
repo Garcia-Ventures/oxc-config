@@ -29,25 +29,29 @@ Mirrors [`@eng618/prettier-config`](https://github.com/eng618/prettier-config).
 `jsdoc` defaults are aggressive (`greedy` re-wrap + `singleLine`
 collapse), which joins intentional `Usage:` / `Flags:` / `Examples:`
 breaks in script headers. The shared config keeps formatting on but
-preserves author breaks:
+preserves author breaks and enhances readability:
 
-| Option                         | Value       | Notes                                               |
-| ------------------------------ | ----------- | --------------------------------------------------- |
-| `jsdoc.capitalizeDescriptions` | `true`      | Keep auto-capitalization                            |
-| `jsdoc.commentLineStrategy`    | `"keep"`    | Don't collapse multi-line ↔ single-line             |
-| `jsdoc.lineWrappingStyle`      | `"balance"` | Preserve breaks when lines fit in `printWidth: 120` |
+| Option                              | Value       | Notes                                                       |
+| ----------------------------------- | ----------- | ----------------------------------------------------------- |
+| `jsdoc.bracketSpacing`              | `true`      | Spacing in type braces `{ string }` matching core style     |
+| `jsdoc.capitalizeDescriptions`      | `true`      | Keep auto-capitalization                                    |
+| `jsdoc.commentLineStrategy`         | `"keep"`    | Don't collapse multi-line ↔ single-line                     |
+| `jsdoc.keepUnparsableExampleIndent` | `true`      | Preserve indentation in non-JS/CLI `@example` snippets      |
+| `jsdoc.lineWrappingStyle`           | `"balance"` | Preserve breaks when lines fit in `printWidth: 120`         |
+| `jsdoc.preferCodeFences`            | `true`      | Use fenced code blocks (```) instead of 4-space indents     |
+| `jsdoc.separateTagGroups`           | `true`      | Add blank lines between tag groups (@param, @returns, etc.) |
 
 Restore aggressive mode per project with
 `jsdoc: true`, or disable with `jsdoc: false`.
 
 ## Sorting (all enabled by default)
 
-| Option            | Value                                                                                         | Replaces                           |
-| ----------------- | --------------------------------------------------------------------------------------------- | ---------------------------------- |
-| `sortImports`     | `true`                                                                                        | `prettier-plugin-organize-imports` |
-| `sortPackageJson` | `{ sortScripts: true }`                                                                       | `prettier-plugin-packagejson`      |
-| `sortTailwindcss` | `{ functions: ["clsx", "cn", "cva", "tw"] }`                                                  | `prettier-plugin-tailwindcss`      |
-| `jsdoc`           | `{ capitalizeDescriptions: true, commentLineStrategy: "keep", lineWrappingStyle: "balance" }` | `prettier-plugin-jsdoc` (softened) |
+| Option            | Value                                                                                                                                                                                                   | Replaces                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| `sortImports`     | `true`                                                                                                                                                                                                  | `prettier-plugin-organize-imports` |
+| `sortPackageJson` | `{ sortScripts: true }`                                                                                                                                                                                 | `prettier-plugin-packagejson`      |
+| `sortTailwindcss` | `{ functions: ["clsx", "cn", "cva", "tw"] }`                                                                                                                                                            | `prettier-plugin-tailwindcss`      |
+| `jsdoc`           | `{ bracketSpacing: true, capitalizeDescriptions: true, commentLineStrategy: "keep", keepUnparsableExampleIndent: true, lineWrappingStyle: "balance", preferCodeFences: true, separateTagGroups: true }` | `prettier-plugin-jsdoc` (softened) |
 
 Disable any feature per project by setting it to `false`
 (see [Configure Oxfmt](../how-to/configure-oxfmt.md)).
