@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.3.0...oxc-config-v1.4.0) (2026-11-06)
+
+
+### Features
+
+* expand jsdoc configuration options in oxfmt config and docs ([2b7ff70](https://github.com/Garcia-Ventures/oxc-config/commit/2b7ff70b458306c61597642188523cbad00d869f))
+
+
+### Build System
+
+* **deps-dev:** bump oxfmt from 0.70.0 to 0.75.0 ([#17](https://github.com/Garcia-Ventures/oxc-config/issues/17)) ([d42c634](https://github.com/Garcia-Ventures/oxc-config/commit/d42c634686248f81f75b15c630d3a639164101db))
+* **deps-dev:** bump oxlint from 1.85.0 to 1.90.0 ([#16](https://github.com/Garcia-Ventures/oxc-config/issues/16)) ([1eb50ea](https://github.com/Garcia-Ventures/oxc-config/commit/1eb50ea788bdf6f62e41bbf60f624dea037712ef))
+* **deps-dev:** bump oxlint-tsgolint from 7.0.2003 to 7.0.2005 ([#15](https://github.com/Garcia-Ventures/oxc-config/issues/15)) ([bcdcdfa](https://github.com/Garcia-Ventures/oxc-config/commit/bcdcdfa2f5e8e2058d7cdf7f60dc7ad8164a6cff))
+
 ## [1.3.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.2.0...oxc-config-v1.3.0) (2026-10-09)
 
 
