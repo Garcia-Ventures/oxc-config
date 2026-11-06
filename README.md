@@ -37,17 +37,17 @@ npm i -D typescript oxlint-tsgolint
 ### Recommended (Vite-oriented default)
 
 ```ts
+import { recommended } from '@gv-tech/oxc-config/recommended';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { recommended } from '@gv-tech/oxc-config/recommended';
 
 export default defineConfig({ extends: [recommended] });
 ```
 
 ```ts
+import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 // oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
-import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 
 export default defineConfig({ ...oxfmtConfig });
 ```
@@ -61,9 +61,9 @@ oxfmt --write .
 ### Vite + React + TypeScript
 
 ```ts
+import { vite } from '@gv-tech/oxc-config/vite';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { vite } from '@gv-tech/oxc-config/vite';
 
 export default defineConfig({ extends: [vite] });
 ```
@@ -71,9 +71,9 @@ export default defineConfig({ extends: [vite] });
 ### Next.js + TypeScript
 
 ```ts
+import { next } from '@gv-tech/oxc-config/next';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { next } from '@gv-tech/oxc-config/next';
 
 export default defineConfig({ extends: [next] });
 ```
@@ -81,11 +81,11 @@ export default defineConfig({ extends: [next] });
 ### TypeScript library (no framework)
 
 ```ts
-// oxlint.config.ts
-import { defineConfig } from 'oxlint';
-import { typescript } from '@gv-tech/oxc-config/typescript';
 // or add React without a framework preset:
 import { react } from '@gv-tech/oxc-config/react';
+import { typescript } from '@gv-tech/oxc-config/typescript';
+// oxlint.config.ts
+import { defineConfig } from 'oxlint';
 
 export default defineConfig({ extends: [react] });
 ```
@@ -93,10 +93,10 @@ export default defineConfig({ extends: [react] });
 ### Opt-in type-aware linting
 
 ```ts
+import { typeAware } from '@gv-tech/oxc-config/type-aware';
+import { vite } from '@gv-tech/oxc-config/vite';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { vite } from '@gv-tech/oxc-config/vite';
-import { typeAware } from '@gv-tech/oxc-config/type-aware';
 
 export default defineConfig({ extends: [vite, typeAware] });
 ```
@@ -106,9 +106,9 @@ Requires `oxlint-tsgolint` installed. Scoped to `**/*.{ts,tsx}` so JS stays fast
 ### Overriding rules
 
 ```ts
+import { vite } from '@gv-tech/oxc-config/vite';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { vite } from '@gv-tech/oxc-config/vite';
 
 export default defineConfig({
   extends: [vite],
@@ -123,9 +123,9 @@ export default defineConfig({
 ```
 
 ```ts
+import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 // oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
-import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 
 export default defineConfig({
   ...oxfmtConfig,

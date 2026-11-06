@@ -20,9 +20,9 @@ npm i -D @gv-tech/oxc-config oxlint oxfmt
 | `prettier`                              | delete — formatting moves to Oxfmt       |
 
 ```ts
+import { next } from '@gv-tech/oxc-config/next';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { next } from '@gv-tech/oxc-config/next';
 
 export default defineConfig({ extends: [next] });
 ```
@@ -30,9 +30,9 @@ export default defineConfig({ extends: [next] });
 ## 3. Replace Prettier config with `oxfmt.config.ts`
 
 ```ts
+import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 // oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
-import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 
 export default defineConfig({ ...oxfmtConfig });
 ```

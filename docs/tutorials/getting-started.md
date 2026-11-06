@@ -23,8 +23,8 @@ npm i -D @gv-tech/oxc-config oxlint oxfmt typescript
 Create `oxlint.config.ts` in your project root:
 
 ```ts
-import { defineConfig } from 'oxlint';
 import { recommended } from '@gv-tech/oxc-config/recommended';
+import { defineConfig } from 'oxlint';
 
 export default defineConfig({ extends: [recommended] });
 ```
@@ -34,8 +34,8 @@ export default defineConfig({ extends: [recommended] });
 Create `oxfmt.config.ts` in your project root:
 
 ```ts
-import { defineConfig } from 'oxfmt';
 import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
+import { defineConfig } from 'oxfmt';
 
 export default defineConfig({ ...oxfmtConfig });
 ```

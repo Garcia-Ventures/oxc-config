@@ -6,9 +6,9 @@ features per project.
 ## Basic setup
 
 ```ts
+import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 // oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
-import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 
 export default defineConfig({ ...oxfmtConfig });
 ```
