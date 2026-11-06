@@ -7,9 +7,9 @@ Goal: customize a preset for your project without forking the package.
 Top-level `rules` win over anything inherited via `extends`:
 
 ```ts
+import { vite } from '@gv-tech/oxc-config/vite';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
-import { vite } from '@gv-tech/oxc-config/vite';
 
 export default defineConfig({
   extends: [vite],
@@ -50,9 +50,9 @@ export default defineConfig({ extends: [vite, typeAware] });
 ## Oxfmt: spread and override fields
 
 ```ts
+import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 // oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
-import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
 
 export default defineConfig({
   ...oxfmtConfig,

@@ -14,8 +14,8 @@ non-Next.js React app).
 2. Create `oxlint.config.ts`:
 
    ```ts
-   import { defineConfig } from 'oxlint';
    import { vite } from '@gv-tech/oxc-config/vite';
+   import { defineConfig } from 'oxlint';
 
    export default defineConfig({ extends: [vite] });
    ```
@@ -23,8 +23,8 @@ non-Next.js React app).
 3. Create `oxfmt.config.ts`:
 
    ```ts
-   import { defineConfig } from 'oxfmt';
    import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
+   import { defineConfig } from 'oxfmt';
 
    export default defineConfig({ ...oxfmtConfig });
    ```

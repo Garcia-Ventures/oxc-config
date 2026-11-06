@@ -15,8 +15,8 @@ Goal: lint a Next.js + TypeScript project (App Router or Pages Router).
 2. Create `oxlint.config.ts`:
 
    ```ts
-   import { defineConfig } from 'oxlint';
    import { next } from '@gv-tech/oxc-config/next';
+   import { defineConfig } from 'oxlint';
 
    export default defineConfig({ extends: [next] });
    ```
@@ -24,8 +24,8 @@ Goal: lint a Next.js + TypeScript project (App Router or Pages Router).
 3. Create `oxfmt.config.ts`:
 
    ```ts
-   import { defineConfig } from 'oxfmt';
    import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
+   import { defineConfig } from 'oxfmt';
 
    export default defineConfig({ ...oxfmtConfig });
    ```

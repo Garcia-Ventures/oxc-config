@@ -13,10 +13,10 @@ Goal: add stricter, type-informed rules on top of any preset.
 2. Extend `typeAware` **after** your framework preset:
 
    ```ts
+   import { typeAware } from '@gv-tech/oxc-config/type-aware';
+   import { vite } from '@gv-tech/oxc-config/vite';
    // oxlint.config.ts
    import { defineConfig } from 'oxlint';
-   import { vite } from '@gv-tech/oxc-config/vite';
-   import { typeAware } from '@gv-tech/oxc-config/type-aware';
 
    export default defineConfig({ extends: [vite, typeAware] });
    ```
