@@ -44,13 +44,17 @@ matching `@eng618/prettier-config`. Override per project via
 
 ## JSDoc comments
 
-The shared config enables `jsdoc` in softened mode:
+The shared config enables `jsdoc` in softened mode with readable group spacing:
 
 ```ts
 jsdoc: {
+  bracketSpacing: true,
   capitalizeDescriptions: true,
   commentLineStrategy: 'keep',
+  keepUnparsableExampleIndent: true,
   lineWrappingStyle: 'balance',
+  preferCodeFences: true,
+  separateTagGroups: true,
 }
 ```
 

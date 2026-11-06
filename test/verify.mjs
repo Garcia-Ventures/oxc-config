@@ -51,11 +51,16 @@ assert.ok(oxfmtConfig.sortImports, 'sortImports enabled');
 assert.ok(oxfmtConfig.sortPackageJson, 'sortPackageJson enabled');
 assert.ok(oxfmtConfig.sortTailwindcss, 'sortTailwindcss enabled');
 // JSDoc is softened (not `true`): `balance` + `keep` preserve intentional
-// `Usage:` / `Flags:` line breaks while keeping capitalization on.
+// `Usage:` / `Flags:` line breaks while keeping capitalization on; group
+// separation, code fences, bracket spacing, and unparseable example indent are enabled.
 assert.equal(typeof oxfmtConfig.jsdoc, 'object', 'jsdoc should be an object');
 assert.equal(oxfmtConfig.jsdoc.lineWrappingStyle, 'balance');
 assert.equal(oxfmtConfig.jsdoc.commentLineStrategy, 'keep');
 assert.equal(oxfmtConfig.jsdoc.capitalizeDescriptions, true);
+assert.equal(oxfmtConfig.jsdoc.bracketSpacing, true);
+assert.equal(oxfmtConfig.jsdoc.separateTagGroups, true);
+assert.equal(oxfmtConfig.jsdoc.preferCodeFences, true);
+assert.equal(oxfmtConfig.jsdoc.keepUnparsableExampleIndent, true);
 
 // Formatter ignores must never swallow source/config/workflow/docs files,
 // otherwise tools like lint-staged fail when every staged file is ignored.
