@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.5.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.4.0...oxc-config-v1.5.0) (2026-11-20)
+
+
+### Features
+
+* add pure Node.js library preset (@gv-tech/oxc-config/node) ([e5af40a](https://github.com/Garcia-Ventures/oxc-config/commit/e5af40a4581e3926a52c8780f050224560885dc6))
+* declare oxlint-tsgolint as an optional peer dependency ([89f1de6](https://github.com/Garcia-Ventures/oxc-config/commit/89f1de6e742066211d862c7ebff878dc9a00090f))
+
+
+### Bug Fixes
+
+* align committed source with oxfmt 0.79 output ([5de4b46](https://github.com/Garcia-Ventures/oxc-config/commit/5de4b46136733c46b40ad54262ab79f070a425ff))
+* replace oxfmt-unstable [@example](https://github.com/example) blocks with regular code fences ([6d88be0](https://github.com/Garcia-Ventures/oxc-config/commit/6d88be000fb69fc039ac84126fe350be624098d8))
+
+
+### Build System
+
+* auto-build dist/ on install so self-lint works on a fresh clone ([4e2083c](https://github.com/Garcia-Ventures/oxc-config/commit/4e2083c3163bb9b9d34f530200adbb05a1263124))
+
+
+### Continuous Integration
+
+* add bun version matrix and cross-platform job to CI ([46a70b2](https://github.com/Garcia-Ventures/oxc-config/commit/46a70b2bda10217fb469af8d404cbeeb7d4c9821))
+
 ## [1.4.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.3.0...oxc-config-v1.4.0) (2026-11-06)
 
 
