@@ -1,12 +1,13 @@
 /**
  * @gv-tech/oxc-config
  *
- *   Shareable Oxlint + Oxfmt configuration for Garcia Ventures projects.
+ * Shareable Oxlint + Oxfmt configuration for Garcia Ventures projects.
  */
 
 import { base } from './base.js';
 import { allJsTsFiles, commonIgnores, formatIgnores, jsFiles, nextIgnores, tsFiles, viteIgnores } from './ignores.js';
 import { next } from './next.js';
+import { node } from './node.js';
 import { oxfmtConfig } from './oxfmt.js';
 import { react } from './react.js';
 import { recommended } from './recommended.js';
@@ -23,6 +24,7 @@ export {
   jsFiles,
   next,
   nextIgnores,
+  node,
   oxfmtConfig,
   react,
   recommended,

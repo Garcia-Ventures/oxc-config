@@ -13,6 +13,7 @@
 | `./react`       | `react`                                                                                              | `typescript`            |
 | `./vite`        | `vite`                                                                                               | `react`                 |
 | `./next`        | `next` (+ `nextjs` alias on `.`)                                                                     | `react`                 |
+| `./node`        | `node`                                                                                               | `base`                  |
 | `./recommended` | `recommended`                                                                                        | `vite`                  |
 | `./type-aware`  | `typeAware`                                                                                          | — (additive, goes last) |
 | `./oxfmt`       | `oxfmtConfig`                                                                                        | —                       |
@@ -64,6 +65,12 @@
 - `rules`: `nextjs/no-html-link-for-pages: warn`,
   `nextjs/no-img-element: warn`
 - Overrides for `next.config.*`, `app/`, `next-env.d.ts`, and Jest tests
+
+## `node`
+
+- Extends `base`
+- `env`: `node` only (drops `browser` from `base`)
+- `rules`: `no-console: off` (Node servers/CLIs commonly log via console)
 
 ## `recommended`
 

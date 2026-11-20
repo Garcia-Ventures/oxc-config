@@ -52,6 +52,9 @@
       "next": [
         "./dist/next.d.ts"
       ],
+      "node": [
+        "./dist/node.d.ts"
+      ],
       "recommended": [
         "./dist/recommended.d.ts"
       ],
@@ -73,6 +76,7 @@
     "./react": "./dist/react.js",
     "./vite": "./dist/vite.js",
     "./next": "./dist/next.js",
+    "./node": "./dist/node.js",
     "./recommended": "./dist/recommended.js",
     "./type-aware": "./dist/type-aware.js",
     "./oxfmt": "./dist/oxfmt.js",

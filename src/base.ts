@@ -1,20 +1,20 @@
 /**
  * @example
  *   ```ts
- *   // oxlint.config.ts
- *   import { defineConfig } from 'oxlint';
- *   import base from '@gv-tech/oxc-config/base';
- *   export default defineConfig({ extends: [base] });
- *   ```;
+ *       // oxlint.config.ts
+ *       import { defineConfig } from 'oxlint';
+ *       import base from '@gv-tech/oxc-config/base';
+ *       export default defineConfig({ extends: [base] });
+ *       ```;
  *
- * @gv-tech/oxc-config - Base Oxlint configuration
+ *     @gv-tech/oxc-config - Base Oxlint configuration
  *
- * Core JavaScript rules with a balanced strict/adoptable posture, mirroring
- * `@gv-tech/eslint-config` base (eslint:recommended + unused-imports).
+ *     Core JavaScript rules with a balanced strict/adoptable posture, mirroring
+ *     `@gv-tech/eslint-config` base (eslint:recommended + unused-imports).
  *
- * - `correctness: deny` (errors, CI-blocking — like eslint:recommended errors)
- * - `suspicious: warn` (adoptable warnings)
- * - `pedantic: off` (opt-in via overrides)
+ *     - `correctness: deny` (errors, CI-blocking — like eslint:recommended errors)
+ *     - `suspicious: warn` (adoptable warnings)
+ *     - `pedantic: off` (opt-in via overrides)
  */
 
 import { commonIgnores } from './ignores.js';

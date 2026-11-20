@@ -1,31 +1,31 @@
 /**
  * @example
  *   ```ts
- *   // oxfmt.config.ts
- *   import { defineConfig } from 'oxfmt';
- *   import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
- *   export default defineConfig({ ...oxfmtConfig });
- *   ```;
+ *       // oxfmt.config.ts
+ *       import { defineConfig } from 'oxfmt';
+ *       import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
+ *       export default defineConfig({ ...oxfmtConfig });
+ *       ```;
  *
- * @gv-tech/oxc-config - Shared Oxfmt configuration
+ *     @gv-tech/oxc-config - Shared Oxfmt configuration
  *
- * Mirrors `@eng618/prettier-config` as closely as Oxfmt allows:
- * printWidth 120, singleQuote, trailingComma all, 2-space, LF, always
- * arrow parens, bracket spacing — plus built-in sorting that replaces
- * prettier plugins (organize-imports, packagejson, tailwindcss, jsdoc).
+ *     Mirrors `@eng618/prettier-config` as closely as Oxfmt allows:
+ *     printWidth 120, singleQuote, trailingComma all, 2-space, LF, always
+ *     arrow parens, bracket spacing — plus built-in sorting that replaces
+ *     prettier plugins (organize-imports, packagejson, tailwindcss, jsdoc).
  *
- * - `sortImports` replaces `prettier-plugin-organize-imports`
- * - `sortPackageJson` replaces `prettier-plugin-packagejson`
- * - `sortTailwindcss` replaces `prettier-plugin-tailwindcss`
- * - `jsdoc` replaces `prettier-plugin-jsdoc` (softened: `balance` +
- *   `keep` so intentional `Usage:` / `Flags:` line breaks survive;
- *   capitalization stays on; tag groups separated, code fences preferred,
- *   bracket spacing enabled)
- * - `sh/sql/prisma` need no plugin: Oxfmt formats them natively
- * - `curly` has no Oxfmt option (core formatter covers it)
- * - arrays (incl. JSON) have no `arrayWrap` option upstream yet: Prettier
- *   fill-packing to `printWidth` applies; see docs for per-project
- *   `overrides` / `ignorePatterns` workarounds.
+ *     - `sortImports` replaces `prettier-plugin-organize-imports`
+ *     - `sortPackageJson` replaces `prettier-plugin-packagejson`
+ *     - `sortTailwindcss` replaces `prettier-plugin-tailwindcss`
+ *     - `jsdoc` replaces `prettier-plugin-jsdoc` (softened: `balance` +
+ *       `keep` so intentional `Usage:` / `Flags:` line breaks survive;
+ *       capitalization stays on; tag groups separated, code fences preferred,
+ *       bracket spacing enabled)
+ *     - `sh/sql/prisma` need no plugin: Oxfmt formats them natively
+ *     - `curly` has no Oxfmt option (core formatter covers it)
+ *     - arrays (incl. JSON) have no `arrayWrap` option upstream yet: Prettier
+ *       fill-packing to `printWidth` applies; see docs for per-project
+ *       `overrides` / `ignorePatterns` workarounds.
  */
 
 import { formatIgnores } from './ignores.js';

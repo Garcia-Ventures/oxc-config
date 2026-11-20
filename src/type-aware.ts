@@ -10,9 +10,9 @@
  * Apply _after_ your framework preset so type-aware rules win:
  *
  * ```ts
- * import { defineConfig } from "oxlint";
- * import { vite } from "@gv-tech/oxc-config/vite";
- * import { typeAware } from "@gv-tech/oxc-config/type-aware";
+ * import { defineConfig } from 'oxlint';
+ * import { vite } from '@gv-tech/oxc-config/vite';
+ * import { typeAware } from '@gv-tech/oxc-config/type-aware';
  * export default defineConfig({ extends: [vite, typeAware] });
  * ```
  *

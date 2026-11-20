@@ -78,6 +78,16 @@ import { defineConfig } from 'oxlint';
 export default defineConfig({ extends: [next] });
 ```
 
+### Node.js library / CLI (no browser)
+
+```ts
+import { node } from '@gv-tech/oxc-config/node';
+// oxlint.config.ts
+import { defineConfig } from 'oxlint';
+
+export default defineConfig({ extends: [node] });
+```
+
 ### TypeScript library (no framework)
 
 ```ts
@@ -144,6 +154,7 @@ export default defineConfig({
 | `@gv-tech/oxc-config/react`       | `typescript` + `react`/`jsx-a11y`                                             |
 | `@gv-tech/oxc-config/vite`        | `react` + `vitest`, browser/node envs, test overrides                         |
 | `@gv-tech/oxc-config/next`        | `react` + `nextjs` plugin, Next.js ignores                                    |
+| `@gv-tech/oxc-config/node`        | `base` + Node-only env (`browser` dropped), `no-console` relaxed              |
 | `@gv-tech/oxc-config/recommended` | Vite-oriented default (base → ts → react → vite-light)                        |
 | `@gv-tech/oxc-config/type-aware`  | Opt-in `oxlint-tsgolint` rules (extends any preset)                           |
 | `@gv-tech/oxc-config/oxfmt`       | Shared Oxfmt config (`oxfmtConfig`)                                           |

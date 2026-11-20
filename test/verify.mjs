@@ -8,6 +8,7 @@ const modules = [
   'react',
   'vite',
   'next',
+  'node',
   'recommended',
   'type-aware',
   'oxfmt',
@@ -20,10 +21,10 @@ for (const name of modules) {
   assert.ok(mod, `${name} should import`);
 }
 
-const { base, typescript, react, vite, next, recommended, typeAware, oxfmtConfig, formatIgnores } =
+const { base, typescript, react, vite, next, node, recommended, typeAware, oxfmtConfig, formatIgnores } =
   await import('../dist/index.js');
 
-for (const [name, cfg] of Object.entries({ base, typescript, react, vite, next, recommended, typeAware })) {
+for (const [name, cfg] of Object.entries({ base, typescript, react, vite, next, node, recommended, typeAware })) {
   assert.equal(typeof cfg, 'object', `${name} should be an object`);
   assert.ok(cfg !== null, `${name} should not be null`);
 }
@@ -33,6 +34,7 @@ assert.ok(Array.isArray(typescript.extends) && typescript.extends.includes(base)
 assert.ok(react.extends?.includes(typescript), 'react extends typescript');
 assert.ok(vite.extends?.includes(react), 'vite extends react');
 assert.ok(next.extends?.includes(react), 'next extends react');
+assert.ok(node.extends?.includes(base), 'node extends base');
 assert.ok(recommended.extends?.includes(vite), 'recommended extends vite');
 assert.ok(Array.isArray(next.plugins) && next.plugins.includes('nextjs'), 'next preset enables nextjs plugin');
 assert.ok(Array.isArray(vite.plugins) && vite.plugins.includes('vitest'), 'vite preset enables vitest plugin');
