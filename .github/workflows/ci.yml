@@ -17,6 +17,50 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Test the pinned dev-toolchain version (.tool-versions) plus latest,
+        # so regressions in either surface before a release.
+        bun-version: ["1.3.14", "latest"]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.bun-version }}
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bun run lint
+      - run: bun run format:ci
+      - run: bun run test
+
+  compat-ts6:
+    name: TS6 compatibility
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        bun-version: ["1.3.14", "latest"]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.bun-version }}
+      - run: bun install --frozen-lockfile
+      # Build with TS 7, then typecheck dist/ with TS 6 (tsc6).
+      # Fails if TS 7 declaration emit is unreadable by TS 6 consumers.
+      - run: bun run build
+      - run: bun run compat:ts6
+
+  cross-platform:
+    name: Cross-platform
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
@@ -26,19 +70,3 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
       - run: bun run lint
-      - run: bun run format:ci
-      - run: bun run test
-  compat-ts6:
-    name: TS6 compatibility
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun install --frozen-lockfile
-      # Build with TS 7, then typecheck dist/ with TS 6 (tsc6).
-      # Fails if TS 7 declaration emit is unreadable by TS 6 consumers.
-      - run: bun run build
-      - run: bun run compat:ts6
