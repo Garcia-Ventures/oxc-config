@@ -57,8 +57,9 @@ We follow a Git Flow-inspired workflow. Please read our [Branching Strategy](BRA
 8. Celebrate when your PR is merged! 🎉
 
 > This repo dogfoods itself: root `oxlint.config.ts` extends `./dist/index.js`
-> and `oxfmt.config.ts` re-exports `./dist/oxfmt.js`. Run `bun run format`
-> before pushing.
+> and `oxfmt.config.ts` re-exports `./dist/oxfmt.js`. `dist/` is gitignored and
+> built automatically on `bun install` via the `postinstall` script, so `bun
+> run lint` / `bun run format` work on a fresh clone with no manual build step.
 
 ## Code Standards
 

@@ -10,26 +10,8 @@ updates:
     schedule:
       interval: "monthly"
 
-  # Enable version updates for go
-  # - package-ecosystem: gomod
-  #   directory: "/"
-  #   schedule:
-  #     interval: "monthly"
-
   # Enable version updates for bun
   - package-ecosystem: "bun"
     directory: "/"
     schedule:
       interval: "monthly"
-
-  # Enable version updates for Docker
-  # - package-ecosystem: "docker"
-  #   directory: "/"
-  #   schedule:
-  #     interval: "monthly"
-
-  # Enable version updates for Dart
-  # - package-ecosystem: "pub"
-  #   directory: "/"
-  #   schedule:
-  #     interval: "monthly"

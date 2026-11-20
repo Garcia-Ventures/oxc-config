@@ -92,6 +92,7 @@
     "format:ci": "oxfmt --check .",
     "lint": "oxlint .",
     "lint:fix": "bun run lint --fix",
+    "postinstall": "bun run build",
     "prepack": "bun run build",
     "prepare": "husky",
     "test": "bun run build && node test/verify.mjs && bun run test:types && bun run compat:ts6",
@@ -102,15 +103,15 @@
   "devDependencies": {
     "@typescript/typescript6": "^6.0.2",
     "husky": "^9.1.7",
-    "lint-staged": "^17.5.1",
-    "oxfmt": "^0.75.0",
-    "oxlint": "^1.83.0",
-    "oxlint-tsgolint": "^7.0.0",
+    "lint-staged": "^17.6.1",
+    "oxfmt": "^0.79.0",
+    "oxlint": "^1.94.0",
+    "oxlint-tsgolint": "^7.0.2007",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
-    "oxfmt": ">=0.68.0",
-    "oxlint": ">=1.83.0",
+    "oxfmt": ">=0.79.0",
+    "oxlint": ">=1.94.0",
     "typescript": ">=6.0.0"
   },
   "peerDependenciesMeta": {
