@@ -1,9 +1,15 @@
 /**
  * @gv-tech/oxc-config - Shared ignore patterns
  *
- * Ported from `@gv-tech/eslint-config` `commonIgnores` and adapted to
- * Oxlint (`ignorePatterns`) + Oxfmt (`ignorePatterns`) gitignore-style matching.
- * Patterns are rooted at the directory containing the config file.
+ * Lint ignores cover generated and foreign artifacts only. Source, scripts,
+ * and tool configs (vite.config, metro.config, tsconfig) stay linted so
+ * preset overrides for those files can match.
+ *
+ * Formatter ignores are a separate, equally narrow list. Release-please owns
+ * CHANGELOG.md, so the formatter yields that one file.
+ *
+ * Patterns are gitignore-style and rooted at the directory that contains the
+ * consuming config file.
  */
 
 /** File patterns for JavaScript files */
@@ -15,7 +21,13 @@ export const tsFiles: string[] = ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts']
 /** All JavaScript + TypeScript file patterns */
 export const allJsTsFiles: string[] = [...jsFiles, ...tsFiles];
 
-/** Common ignore patterns shared by all presets. Mirrors `@gv-tech/eslint-config` commonIgnores. */
+/**
+ * Generated or foreign paths shared by every lint preset.
+ *
+ * Intentionally absent: `scripts/**`, `*.config.*`, docs, and license files.
+ * Oxlint does not lint markdown, and ignoring a config file disables the
+ * override that relaxes it.
+ */
 export const commonIgnores: string[] = [
   '**/node_modules/**',
   '**/dist/**',
@@ -36,42 +48,18 @@ export const commonIgnores: string[] = [
   '**/.idea/**',
   '**/.DS_Store',
   '**/.env*',
-  '**/CHANGELOG.md',
-  '**/README.md',
-  '**/LICENSE',
-  '**/SECURITY.md',
-  '**/CODEOWNERS',
-  '**/CONTRIBUTING.md',
-  '**/FUNDING.yml',
-  '**/PULL_REQUEST_TEMPLATE/**',
-  '**/wrangler.toml',
-  '**/project.json',
-  '**/nx.json',
   '**/package-lock.json',
   '**/bun.lockb',
   '**/bun.lock',
   '**/pnpm-lock.yaml',
   '**/yarn.lock',
-  '**/tsconfig*.json',
-  '**/postcss.config.*',
-  '**/tailwind.config.*',
-  '**/vite.config.*',
-  '**/vitest.config.*',
-  '**/babel.config.*',
-  '**/metro.config.*',
-  '**/eas.json',
-  '**/app.json',
   '**/nativewind-env.d.ts',
-  '**/assets/**',
-  '**/public/**',
-  '**/scripts/**',
+  '**/next-env.d.ts',
   '**/dist-site/**',
-  // extra tooling artifacts common in Oxc-era repos
   '**/.vercel/**',
   '**/.output/**',
   '**/.firebase/**',
   '**/.netlify/**',
-  '**/.storybook/**',
   '**/.parcel-cache/**',
   '**/.eslintcache',
   '**/.stylelintcache',
@@ -87,13 +75,16 @@ export const commonIgnores: string[] = [
 /** Vite-specific ignores (extends common) */
 export const viteIgnores: string[] = [...commonIgnores, '**/playwright-report/**', '**/test-results/**'];
 
-/** Next.js-specific ignores (extends common) */
-export const nextIgnores: string[] = [...commonIgnores, '.next/**', 'out/**', 'next-env.d.ts'];
+/** Next.js-specific ignores. `next-env.d.ts` already lives in `commonIgnores`. */
+export const nextIgnores: string[] = [...commonIgnores];
+
+/** Expo / React Native ignores: common plus native project trees. */
+export const expoIgnores: string[] = [...commonIgnores, '**/android/**', '**/ios/**'];
 
 /**
  * Ignore patterns for Oxfmt (formatting).
  *
- * Deliberately narrower than the lint-oriented lists above: only generated or foreign artifacts. Source files, configs,
+ * Deliberately narrower than a blanket "skip docs" list: only generated or foreign artifacts. Source files, configs,
  * workflows, and docs MUST stay formattable — otherwise tools like lint-staged fail when every staged file is ignored.
  */
 export const formatIgnores: string[] = [

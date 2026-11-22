@@ -1,28 +1,29 @@
 /**
  * @gv-tech/oxc-config - Vite + React Oxlint configuration
  *
- * Optimized for Vite + React + TypeScript. Adds `vitest`/`jest` test
- * overrides and browser+node envs. Use for SPAs, libraries, and any
- * non-Next.js React project.
+ * `react` plus the Vitest plugin, browser and Node globals, and test/config
+ * overrides. Use for SPAs and any non-Next React app.
+ *
+ * ```ts
+ * import { defineConfig } from 'oxlint';
+ * import { vite } from '@gv-tech/oxc-config/vite';
+ * export default defineConfig(vite);
+ * ```
  */
 
-import { viteIgnores } from './ignores.js';
+import { compose } from './compose.js';
 import { react } from './react.js';
 import type { OxlintConfig } from './types.js';
 
-export const vite: OxlintConfig = {
-  extends: [react],
-  plugins: ['eslint', 'typescript', 'import', 'react', 'jsx-a11y', 'vitest', 'unicorn', 'oxc'],
-  env: {
-    browser: true,
-    node: true,
-  },
-  ignorePatterns: viteIgnores,
+export const vite: OxlintConfig = compose(react, {
+  plugins: ['vitest'],
+  ignorePatterns: ['**/playwright-report/**', '**/test-results/**'],
   overrides: [
     {
       files: ['**/*.test.*', '**/*.spec.*', '**/test/**', '**/tests/**'],
       plugins: ['vitest', 'jest'],
-      env: { 'vitest/globals': true },
+      // Restate browser/node in case an override env replaces the parent env.
+      env: { browser: true, node: true, 'vitest/globals': true },
       rules: {
         'typescript/no-explicit-any': 'off',
         'typescript/no-non-null-assertion': 'off',
@@ -37,6 +38,6 @@ export const vite: OxlintConfig = {
       },
     },
   ],
-};
+});
 
 export default vite;

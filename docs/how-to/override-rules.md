@@ -2,19 +2,22 @@
 
 Goal: customize a preset for your project without forking the package.
 
+Use `configure`. It merges your fields onto the flat preset and returns
+one root config. Wrapping a preset in `extends` drops `env`,
+`ignorePatterns`, and `settings`.
+
 ## Oxlint: add top-level rules
 
-Top-level `rules` win over anything inherited via `extends`:
-
 ```ts
-import { vite } from '@gv-tech/oxc-config/vite';
+import { configure } from '@gv-tech/oxc-config';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({
-  extends: [vite],
-  rules: { 'no-console': 'off' },
-});
+export default defineConfig(
+  configure('vite', {
+    rules: { 'no-console': 'off' },
+  }),
+);
 ```
 
 > Use upstream canonical rule names: core rules are unprefixed
@@ -24,28 +27,35 @@ export default defineConfig({
 
 ## Oxlint: scope overrides to file patterns
 
-```ts
-export default defineConfig({
-  extends: [vite],
-  overrides: [
-    {
-      files: ['scripts/**/*'],
-      rules: { 'no-console': 'off' },
-    },
-  ],
-});
-```
-
-## Oxlint: combine presets
-
-`extends` accepts multiple configs; later entries win on conflict.
-`type-aware` is designed to go last:
+`scripts/**` is linted. An override matches it.
 
 ```ts
-import { typeAware } from '@gv-tech/oxc-config/type-aware';
-
-export default defineConfig({ extends: [vite, typeAware] });
+export default defineConfig(
+  configure('vite', {
+    overrides: [
+      {
+        files: ['scripts/**/*'],
+        rules: { 'no-console': 'off' },
+      },
+    ],
+  }),
+);
 ```
+
+## Oxlint: React version, ignores, and type-aware mode
+
+```ts
+export default defineConfig(
+  configure('vite', {
+    reactVersion: '18.3.1',
+    ignorePatterns: ['generated/**'],
+    typeAware: true,
+  }),
+);
+```
+
+`ignorePatterns` are appended to the preset list. `typeAware: true` is
+for the root config only. See [Enable type-aware linting](enable-type-aware.md).
 
 ## Oxfmt: spread and override fields
 

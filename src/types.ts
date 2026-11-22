@@ -8,7 +8,7 @@
  * ```ts
  * import { defineConfig } from 'oxlint';
  * import { vite } from '@gv-tech/oxc-config/vite';
- * export default defineConfig({ extends: [vite] }); // no cast needed
+ * export default defineConfig(vite); // no cast needed
  * ```
  *
  * `import type` is fully erased at build time, so the package keeps zero

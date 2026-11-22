@@ -10,28 +10,31 @@ npm rm @gv-tech/eslint-config @eng618/prettier-config eslint prettier
 npm i -D @gv-tech/oxc-config oxlint oxfmt
 ```
 
+`oxlint` must be `>= 1.94.0` and `oxfmt` must be `>= 0.79.0`.
+
 ## 2. Replace `eslint.config.mjs` with `oxlint.config.ts`
 
-| Before                                  | After                                    |
-| --------------------------------------- | ---------------------------------------- |
-| `javascriptRecommended` / `recommended` | `recommended`                            |
-| `typescript`                            | `typescript` (or `react` for React apps) |
-| `next` / `nextjs`                       | `next`                                   |
-| `prettier`                              | delete — formatting moves to Oxfmt       |
+| Before                                  | After                                              |
+| --------------------------------------- | -------------------------------------------------- |
+| `javascriptRecommended` / `recommended` | `recommended` (`library`) or `vite` for a Vite app |
+| `typescript`                            | `library` or `typescript`                          |
+| `next` / `nextjs`                       | `next`                                             |
+| Node-only                               | `node`                                             |
+| `prettier`                              | delete — formatting moves to Oxfmt                 |
+
+Pass the preset as the root config. `extends` drops env, ignores, and settings.
 
 ```ts
 import { next } from '@gv-tech/oxc-config/next';
-// oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [next] });
+export default defineConfig(next);
 ```
 
 ## 3. Replace Prettier config with `oxfmt.config.ts`
 
 ```ts
 import { oxfmtConfig } from '@gv-tech/oxc-config/oxfmt';
-// oxfmt.config.ts
 import { defineConfig } from 'oxfmt';
 
 export default defineConfig({ ...oxfmtConfig });

@@ -12,13 +12,13 @@ Goal: lint a Next.js + TypeScript project (App Router or Pages Router).
 
    No extra plugin install needed — `nextjs` is a built-in Oxlint plugin.
 
-2. Create `oxlint.config.ts`:
+2. Create `oxlint.config.ts`. Pass `next` as the root config:
 
    ```ts
    import { next } from '@gv-tech/oxc-config/next';
    import { defineConfig } from 'oxlint';
 
-   export default defineConfig({ extends: [next] });
+   export default defineConfig(next);
    ```
 
 3. Create `oxfmt.config.ts`:
@@ -42,10 +42,10 @@ Goal: lint a Next.js + TypeScript project (App Router or Pages Router).
 - Everything in `react` (TypeScript + React + import rules).
 - The `nextjs` plugin: `no-html-link-for-pages` and `no-img-element`
   as warnings (adoptable; tighten to `error` per project if desired).
-- `nextIgnores` (`.next/`, `out/`, `next-env.d.ts` — see
-  [ignores reference](../reference/ignores.md)).
-- Relaxed rules for `next.config.*` and `app/` directories, plus Jest
-  test overrides.
+- Generated `next-env.d.ts` is ignored. `next.config.*` and `app/` stay linted,
+  with `import/no-default-export` relaxed there.
+- Jest globals in test files, plus relaxed `any` and `console`.
+- Browser and Node globals.
 
 ## See also
 

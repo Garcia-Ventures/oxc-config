@@ -1,17 +1,16 @@
 /**
  * @gv-tech/oxc-config - Recommended Oxlint configuration
  *
- * Sensible default: Vite-oriented but framework-agnostic.
- * `recommended` === base + TypeScript + React + Vite-light (test/config
- * overrides included, no Next.js rules). Vite and Next projects can use
- * their dedicated presets instead; plain TS/React libs can use this safely.
+ * The safe default for a repo that is not a specific framework app:
+ * TypeScript, Node globals, no React, no Vitest, no Next.js.
+ *
+ * Earlier releases aliased `recommended` to the Vite preset. Vite apps
+ * should import `vite`. Next.js apps should import `next`.
  */
 
+import { library } from './library.js';
 import type { OxlintConfig } from './types.js';
-import { vite } from './vite.js';
 
-export const recommended: OxlintConfig = {
-  extends: [vite],
-};
+export const recommended: OxlintConfig = library;
 
 export default recommended;

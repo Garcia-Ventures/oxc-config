@@ -1,28 +1,24 @@
 /**
  * @gv-tech/oxc-config - Opt-in type-aware Oxlint configuration
  *
- * Requires `oxlint-tsgolint` alongside `oxlint`:
+ * Requires `oxlint-tsgolint` (or another type-aware backend) alongside `oxlint`.
  *
- * ```sh
- * npm i -D oxlint oxlint-tsgolint @gv-tech/oxc-config
- * ```
- *
- * Apply _after_ your framework preset so type-aware rules win:
+ * `options.typeAware` is legal only on the root config file. Nested package
+ * configs in a monorepo must not set it; use `configure(preset, { typeAware: 'rules' })`
+ * there and run `oxlint --type-aware` from the repository root.
  *
  * ```ts
  * import { defineConfig } from 'oxlint';
- * import { vite } from '@gv-tech/oxc-config/vite';
- * import { typeAware } from '@gv-tech/oxc-config/type-aware';
- * export default defineConfig({ extends: [vite, typeAware] });
+ * import { configure, vite } from '@gv-tech/oxc-config';
+ * export default defineConfig(configure(vite, { typeAware: true }));
  * ```
- *
- * Scoped to TS/TSX only to keep JS/fast paths untouched.
  */
 
 import { tsFiles } from './ignores.js';
 import type { OxlintConfig } from './types.js';
 
 export const typeAware: OxlintConfig = {
+  options: { typeAware: true },
   overrides: [
     {
       files: tsFiles,

@@ -8,13 +8,13 @@
  * - `suspicious: warn` (adoptable warnings)
  * - `pedantic: off` (opt-in via overrides)
  *
- * Example usage:
+ * Pass this object as the root config. Wrapping it in `extends` drops `env`
+ * and `ignorePatterns`.
  *
  * ```ts
- * // oxlint.config.ts
  * import { defineConfig } from 'oxlint';
- * import base from '@gv-tech/oxc-config/base';
- * export default defineConfig({ extends: [base] });
+ * import { base } from '@gv-tech/oxc-config/base';
+ * export default defineConfig(base);
  * ```
  */
 
@@ -39,6 +39,9 @@ export const base: OxlintConfig = {
     // `eslint/no-console`) — canonical names get precise types and IDE
     // completion; both forms behave identically at runtime.
     'eslint/no-unused-vars': 'off',
+    // `env` only matters when no-undef is on. TypeScript files turn it off
+    // (typescript-eslint recommends that); JS keeps it so browser vs node is real.
+    'no-undef': 'deny',
     'unicorn/prefer-node-protocol': 'warn',
     'no-console': 'warn',
     'no-debugger': 'deny',

@@ -17,6 +17,7 @@ Task-oriented recipes. Each solves one problem.
 
 - [Use the Vite preset](how-to/use-vite-preset.md)
 - [Use the Next.js preset](how-to/use-next-preset.md)
+- [Use the config in a monorepo](how-to/use-in-a-monorepo.md)
 - [Override rules and options](how-to/override-rules.md)
 - [Configure Oxfmt](how-to/configure-oxfmt.md)
 - [Enable type-aware linting](how-to/enable-type-aware.md)

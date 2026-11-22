@@ -5,17 +5,18 @@ Shareable [Oxlint](https://oxc.rs/docs/guide/usage/linter) + [Oxfmt](https://oxc
 ## Features
 
 - 🚀 **Oxlint + Oxfmt** — linting and formatting from a single package
-- 📦 **Modular presets** — `base`, `typescript`, `react`, `vite`, `next`, `recommended`, `type-aware`
+- 📦 **Modular presets** — `library`, `node`, `react`, `vite`, `next`, `expo`, plus `configure()` for project overrides
 - 🔷 **TypeScript-first** — strict-but-adoptable rules mirroring `@gv-tech/eslint-config`
-- ⚛️ **Vite and Next.js** — dedicated presets with framework-specific plugins and ignores
+- ⚛️ **Vite, Next.js, and Expo** — dedicated presets with framework plugins, envs, and ignores
 - 💅 **Prettier-compatible style** — Oxfmt defaults mirror `@eng618/prettier-config` (120 cols, single quotes, trailing commas, sorted imports/package.json/Tailwind)
 - 🛡️ **Type-safe** — presets are typed with the real upstream `oxlint`/`oxfmt` config types, so `defineConfig` consumption needs no casts
 
 ## Requirements
 
 - Node.js `>=22.18.0` (required for `oxlint.config.ts` / `oxfmt.config.ts`)
-- `oxlint` `>=1.0.0` and/or `oxfmt` `>=0.9.0`
+- `oxlint` `>=1.94.0` and/or `oxfmt` `>=0.79.0`
 - `typescript` `>=6.0.0` (optional peer; the package builds on TypeScript 7 and its types are verified against TypeScript 6 — see `test/compat-ts6`)
+- `oxlint-tsgolint` `>=7.0.2007` (optional peer, only for type-aware linting)
 
 ## Installation
 
@@ -34,14 +35,18 @@ npm i -D typescript oxlint-tsgolint
 
 ## Usage
 
-### Recommended (Vite-oriented default)
+Pass a preset as the root config. Oxlint does not inherit `env`, `ignorePatterns`, or `settings` through `extends`, so `defineConfig({ extends: [vite] })` drops browser/node globals, ignore patterns, and the React version. `defineConfig(vite)` keeps them.
+
+`recommended` is the TypeScript library preset (Node globals, no React). Releases before this one pointed `recommended` at the Vite preset. Vite apps should import `vite`.
+
+### TypeScript library (default)
 
 ```ts
 import { recommended } from '@gv-tech/oxc-config/recommended';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [recommended] });
+export default defineConfig(recommended);
 ```
 
 ```ts
@@ -65,7 +70,7 @@ import { vite } from '@gv-tech/oxc-config/vite';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [vite] });
+export default defineConfig(vite);
 ```
 
 ### Next.js + TypeScript
@@ -75,61 +80,75 @@ import { next } from '@gv-tech/oxc-config/next';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [next] });
+export default defineConfig(next);
 ```
 
-### Node.js library / CLI (no browser)
+### Node.js service or CLI
+
+`node` is the library preset plus `no-console: off`. Browser globals stay off, so a JS file that references `window` fails `no-undef`. TypeScript files turn `no-undef` off.
 
 ```ts
 import { node } from '@gv-tech/oxc-config/node';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [node] });
+export default defineConfig(node);
 ```
 
-### TypeScript library (no framework)
+### Expo / React Native
 
 ```ts
-// or add React without a framework preset:
-import { react } from '@gv-tech/oxc-config/react';
-import { typescript } from '@gv-tech/oxc-config/typescript';
+import { expo } from '@gv-tech/oxc-config/expo';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [react] });
+export default defineConfig(expo);
+```
+
+### React without a framework preset
+
+```ts
+import { react } from '@gv-tech/oxc-config/react';
+// oxlint.config.ts
+import { defineConfig } from 'oxlint';
+
+export default defineConfig(react);
 ```
 
 ### Opt-in type-aware linting
 
+`options.typeAware` is only legal on the repository root config. Requires `oxlint-tsgolint`. Rules are scoped to TypeScript files.
+
 ```ts
-import { typeAware } from '@gv-tech/oxc-config/type-aware';
-import { vite } from '@gv-tech/oxc-config/vite';
+import { configure } from '@gv-tech/oxc-config';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [vite, typeAware] });
+export default defineConfig(configure('vite', { typeAware: true }));
 ```
 
-Requires `oxlint-tsgolint` installed. Scoped to `**/*.{ts,tsx}` so JS stays fast.
+In a monorepo, a nested `oxlint.config.ts` must not set that option. Use `configure('next', { typeAware: 'rules' })` in the package and `oxlint --type-aware` from the root. See [Use in a monorepo](docs/how-to/use-in-a-monorepo.md).
 
 ### Overriding rules
 
 ```ts
-import { vite } from '@gv-tech/oxc-config/vite';
+import { configure } from '@gv-tech/oxc-config';
 // oxlint.config.ts
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({
-  extends: [vite],
-  rules: { 'no-console': 'off' },
-  overrides: [
-    {
-      files: ['scripts/**/*'],
-      rules: { 'no-console': 'off' },
-    },
-  ],
-});
+export default defineConfig(
+  configure('vite', {
+    rules: { 'no-console': 'off' },
+    ignorePatterns: ['generated/**'],
+    reactVersion: '18.3.1',
+    overrides: [
+      {
+        files: ['scripts/**/*'],
+        rules: { 'no-console': 'off' },
+      },
+    ],
+  }),
+);
 ```
 
 ```ts
@@ -148,17 +167,20 @@ export default defineConfig({
 
 | Export                            | Description                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------- |
-| `@gv-tech/oxc-config`             | `recommended` (default export)                                                |
-| `@gv-tech/oxc-config/base`        | Core JS rules, `eslint`/`unicorn`/`oxc` plugins                               |
-| `@gv-tech/oxc-config/typescript`  | `base` + `typescript`/`import` plugins                                        |
-| `@gv-tech/oxc-config/react`       | `typescript` + `react`/`jsx-a11y`                                             |
-| `@gv-tech/oxc-config/vite`        | `react` + `vitest`, browser/node envs, test overrides                         |
-| `@gv-tech/oxc-config/next`        | `react` + `nextjs` plugin, Next.js ignores                                    |
-| `@gv-tech/oxc-config/node`        | `base` + Node-only env (`browser` dropped), `no-console` relaxed              |
-| `@gv-tech/oxc-config/recommended` | Vite-oriented default (base → ts → react → vite-light)                        |
-| `@gv-tech/oxc-config/type-aware`  | Opt-in `oxlint-tsgolint` rules (extends any preset)                           |
+| `@gv-tech/oxc-config`             | `recommended` (default). Also exports `configure`.                            |
+| `@gv-tech/oxc-config/base`        | Core JS rules, `eslint`/`unicorn`/`oxc`, browser + node                       |
+| `@gv-tech/oxc-config/typescript`  | `base` + `typescript`/`import`. `no-undef` off in TS files                    |
+| `@gv-tech/oxc-config/library`     | `typescript`, Node globals only, `no-console` warns                           |
+| `@gv-tech/oxc-config/react`       | `typescript` + `react`/`jsx-a11y`, React 19                                   |
+| `@gv-tech/oxc-config/vite`        | `react` + Vitest, browser + node, test overrides                              |
+| `@gv-tech/oxc-config/next`        | `react` + `nextjs` plugin                                                     |
+| `@gv-tech/oxc-config/expo`        | `react`, no browser globals, `android/` and `ios/` ignored                    |
+| `@gv-tech/oxc-config/node`        | `library` + `no-console` off                                                  |
+| `@gv-tech/oxc-config/recommended` | Same object as `library`                                                      |
+| `@gv-tech/oxc-config/configure`   | `configure(preset, overrides)` merges a root config                           |
+| `@gv-tech/oxc-config/type-aware`  | Opt-in type-aware rules. Prefer `configure(preset, { typeAware: true })`      |
 | `@gv-tech/oxc-config/oxfmt`       | Shared Oxfmt config (`oxfmtConfig`)                                           |
-| `@gv-tech/oxc-config/ignores`     | `commonIgnores`, `viteIgnores`, `nextIgnores`, `formatIgnores`, file patterns |
+| `@gv-tech/oxc-config/ignores`     | `commonIgnores`, `viteIgnores`, `nextIgnores`, `expoIgnores`, `formatIgnores` |
 
 ## `vite` vs `next` — which preset?
 
@@ -170,7 +192,7 @@ export default defineConfig({
 | Ignores        | `dist`, `coverage`, `playwright-report`   | `.next`, `out`, `next-env.d.ts` |
 | Test overrides | Vitest globals, relaxed `any`/`console`   | Jest, relaxed `any`/`console`   |
 
-Rule of thumb: Next.js project → `next`. Everything else React → `vite` (or `recommended`, which is `vite`-light). Plain TS, no React → `typescript`.
+Rule of thumb: Next.js → `next`. Expo or React Native → `expo`. Other React → `vite`. A Node service or CLI → `node`. A TypeScript library → `library` (also the default `recommended`). Plain JS that runs in both environments → `base`.
 
 ## Oxfmt style
 
@@ -182,9 +204,16 @@ Known gaps (no Oxfmt equivalent): `curly` enforcement (covered by the core forma
 
 ## Editor setup
 
-VSCode with [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode): format-on-save via Oxfmt, inline Oxlint diagnostics. See [`.vscode/settings.json`](.vscode/settings.json).
+Install [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) and set it as the formatter:
 
-## Scripts for consumers
+```json
+{
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true
+}
+```
+
+## Scripts and CI
 
 ```json
 {
@@ -195,6 +224,13 @@ VSCode with [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemNa
   }
 }
 ```
+
+```yaml
+- run: npx oxlint
+- run: npx oxfmt --check .
+```
+
+Do not pass `oxlint -c` with an absolute path. Oxlint 1.94 loads that config but does not apply its `ignorePatterns`. A relative `-c oxlint.config.ts`, or no `-c` at all, applies them. `-c` also disables nested config lookup.
 
 ## Standalone use (no `package.json`)
 
@@ -247,7 +283,7 @@ bun x oxfmt -c ./node_modules/@gv-tech/oxc-config/dist/oxfmt.json --write .
 Full docs follow the [Diátaxis](https://diataxis.fr/) framework in [`docs/`](docs/):
 
 - Tutorials: [Getting Started](docs/tutorials/getting-started.md)
-- How-tos: [Vite](docs/how-to/use-vite-preset.md) · [Next.js](docs/how-to/use-next-preset.md) · [Overrides](docs/how-to/override-rules.md) · [Oxfmt](docs/how-to/configure-oxfmt.md) · [Type-aware](docs/how-to/enable-type-aware.md) · [Migration](docs/how-to/migrate-from-eslint-prettier.md)
+- How-tos: [Vite](docs/how-to/use-vite-preset.md) · [Next.js](docs/how-to/use-next-preset.md) · [Monorepo](docs/how-to/use-in-a-monorepo.md) · [Overrides](docs/how-to/override-rules.md) · [Oxfmt](docs/how-to/configure-oxfmt.md) · [Type-aware](docs/how-to/enable-type-aware.md) · [Migration](docs/how-to/migrate-from-eslint-prettier.md)
 - Reference: [Presets](docs/reference/presets.md) · [Oxfmt options](docs/reference/oxfmt-options.md) · [Ignores](docs/reference/ignores.md)
 - Explanation: [Design philosophy](docs/explanation/design-philosophy.md) · [Vite vs Next](docs/explanation/vite-vs-next.md) · [Prettier parity](docs/explanation/prettier-parity.md)
 

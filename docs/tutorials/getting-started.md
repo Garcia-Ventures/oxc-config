@@ -10,7 +10,7 @@ shared linting and formatting to a fresh TypeScript project. By the end,
 ## Prerequisites
 
 - Node.js `>=22.18.0` (check with `node --version`)
-- An existing TypeScript project (Vite React template works well)
+- An existing TypeScript project
 
 ## 1. Install the packages
 
@@ -18,16 +18,30 @@ shared linting and formatting to a fresh TypeScript project. By the end,
 npm i -D @gv-tech/oxc-config oxlint oxfmt typescript
 ```
 
-## 2. Add the recommended lint config
+Peers: `oxlint >= 1.94.0`, `oxfmt >= 0.79.0`, `typescript >= 6`.
 
-Create `oxlint.config.ts` in your project root:
+## 2. Add the lint config
+
+Create `oxlint.config.ts` in your project root. Pass the preset as the
+config object. Do not wrap it in `extends`.
 
 ```ts
 import { recommended } from '@gv-tech/oxc-config/recommended';
 import { defineConfig } from 'oxlint';
 
-export default defineConfig({ extends: [recommended] });
+export default defineConfig(recommended);
 ```
+
+`recommended` is a TypeScript library preset: Node globals, no React.
+Swap the import when the project has a framework:
+
+| Project             | Import                                       |
+| ------------------- | -------------------------------------------- |
+| Vite + React        | `vite` from `@gv-tech/oxc-config/vite`       |
+| Next.js             | `next` from `@gv-tech/oxc-config/next`       |
+| Expo / React Native | `expo` from `@gv-tech/oxc-config/expo`       |
+| Node service or CLI | `node` from `@gv-tech/oxc-config/node`       |
+| TypeScript library  | `library` from `@gv-tech/oxc-config/library` |
 
 ## 3. Add the shared format config
 
@@ -53,7 +67,7 @@ If `oxfmt` reports files needing formatting, apply it:
 npx oxfmt --write .
 ```
 
-## 5. Wire up scripts and the editor
+## 5. Wire up scripts, CI, and the editor
 
 Add to your `package.json`:
 
@@ -67,18 +81,33 @@ Add to your `package.json`:
 }
 ```
 
-Install the [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
-extension for inline diagnostics and format-on-save.
+In CI:
+
+```yaml
+- run: npx oxlint
+- run: npx oxfmt --check .
+```
+
+Install [`oxc.oxc-vscode`](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode)
+and set it as the default formatter:
+
+```json
+{
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true
+}
+```
 
 ## What you just did
 
-- `recommended` gave you base + TypeScript + React + Vite-light rules
-  (see [presets reference](../reference/presets.md)).
+- `recommended` gave you base + TypeScript rules, Node globals, and the
+  shared ignore list (see [presets reference](../reference/presets.md)).
 - `oxfmtConfig` gave you the Garcia Ventures code style: 120 columns,
   single quotes, sorted imports (see [Oxfmt options](../reference/oxfmt-options.md)).
 
 ## Next steps
 
-- Vite app? Switch to the dedicated preset: [Use the Vite preset](../how-to/use-vite-preset.md).
+- Vite app? [Use the Vite preset](../how-to/use-vite-preset.md).
 - Next.js app? [Use the Next.js preset](../how-to/use-next-preset.md).
+- Several packages in one repo? [Use in a monorepo](../how-to/use-in-a-monorepo.md).
 - Coming from ESLint/Prettier? [Migrate from ESLint + Prettier](../how-to/migrate-from-eslint-prettier.md).

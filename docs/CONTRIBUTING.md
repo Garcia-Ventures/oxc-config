@@ -56,10 +56,12 @@ We follow a Git Flow-inspired workflow. Please read our [Branching Strategy](BRA
 7. Address review feedback
 8. Celebrate when your PR is merged! 🎉
 
-> This repo dogfoods itself: root `oxlint.config.ts` extends `./dist/index.js`
-> and `oxfmt.config.ts` re-exports `./dist/oxfmt.js`. `dist/` is gitignored and
-> built automatically on `bun install` via the `postinstall` script, so `bun
-> run lint` / `bun run format` work on a fresh clone with no manual build step.
+> This repo dogfoods itself: root `oxlint.config.ts` calls `configure('node')`
+> from `./dist/configure.js`, and `oxfmt.config.ts` spreads `./dist/oxfmt.js`.
+> `dist/` is gitignored and built on `bun install` via the `prepare` script
+> (`husky && bun run build`). `prepare` does not run when someone installs
+> the published package, so consumers are not asked to rebuild it. `bun run
+> lint` / `bun run format` work on a fresh clone with no manual build step.
 
 ## Code Standards
 

@@ -1,21 +1,28 @@
 import { defineConfig as defineOxfmtConfig } from 'oxfmt';
 // Downstream usage simulation: exercises this package exactly the way
-// consumers do (per README/docs), using the REAL upstream `defineConfig`
-// from `oxlint` / `oxfmt`. Must typecheck with zero casts.
+// consumers do, using the real `defineConfig` from `oxlint` / `oxfmt`.
+// Presets are the root config. `configure` merges project overrides.
 import { defineConfig as defineOxlintConfig } from 'oxlint';
 
-import { next, nextjs, recommended, typeAware, vite } from '../../dist/index.js';
+import { configure, expo, next, nextjs, node, recommended, typeAware, vite } from '../../dist/index.js';
 import { oxfmtConfig } from '../../dist/oxfmt.js';
 
-export const lintRecommended = defineOxlintConfig({ extends: [recommended] });
-export const lintVite = defineOxlintConfig({ extends: [vite] });
-export const lintNext = defineOxlintConfig({ extends: [next] });
+export const lintRecommended = defineOxlintConfig(recommended);
+export const lintVite = defineOxlintConfig(vite);
+export const lintNext = defineOxlintConfig(next);
 export const lintNextAlias = defineOxlintConfig(nextjs);
-export const lintMixed = defineOxlintConfig({ extends: [vite, typeAware] });
-export const lintOverride = defineOxlintConfig({
-  extends: [vite],
-  rules: { 'no-console': 'off' },
-});
+export const lintNode = defineOxlintConfig(node);
+export const lintExpo = defineOxlintConfig(configure('expo'));
+export const lintExpoDirect = defineOxlintConfig(expo);
+export const lintTypeAware = defineOxlintConfig(configure(vite, { typeAware: true, reactVersion: '18.3.1' }));
+export const lintTypeAwareRulesOnly = defineOxlintConfig(configure(next, { typeAware: 'rules' }));
+export const lintOverride = defineOxlintConfig(
+  configure(vite, {
+    rules: { 'no-console': 'off' },
+    ignorePatterns: ['generated/**'],
+  }),
+);
+export const lintTypeAwarePreset = defineOxlintConfig(typeAware);
 
 export const format = defineOxfmtConfig({ ...oxfmtConfig });
 export const formatOverride = defineOxfmtConfig({ ...oxfmtConfig, printWidth: 100 });

@@ -7,9 +7,12 @@
  */
 
 import { base } from '../../dist/base.js';
+import { configure, type ConfigureOptions, type ProjectKind } from '../../dist/configure.js';
+import { expo } from '../../dist/expo.js';
 import {
   allJsTsFiles,
   commonIgnores,
+  expoIgnores,
   formatIgnores,
   jsFiles,
   nextIgnores,
@@ -17,6 +20,8 @@ import {
   viteIgnores,
 } from '../../dist/ignores.js';
 import { next, nextjs } from '../../dist/index.js';
+import { library } from '../../dist/library.js';
+import { node } from '../../dist/node.js';
 import { oxfmtConfig } from '../../dist/oxfmt.js';
 import { react } from '../../dist/react.js';
 import recommendedDefault, { recommended } from '../../dist/recommended.js';
@@ -25,41 +30,42 @@ import type { OxfmtConfig, OxlintConfig } from '../../dist/types.js';
 import { typescript } from '../../dist/typescript.js';
 import { vite } from '../../dist/vite.js';
 
-// Every lint preset must satisfy the shared config shape on TS 6.
 const lintPresets: OxlintConfig[] = [
   base,
   typescript,
+  library,
   react,
   vite,
   next,
+  expo,
+  node,
   recommended,
   typeAware,
   nextjs,
   recommendedDefault,
+  configure(vite, { typeAware: true, reactVersion: '18.3.1' }),
 ];
 
-// Preset composition must survive a TS 6 typecheck.
-const tsExtendsBase: boolean = typescript.extends?.includes(base) ?? false;
-const reactExtendsTs: boolean = react.extends?.includes(typescript) ?? false;
-const viteExtendsReact: boolean = vite.extends?.includes(react) ?? false;
-const nextExtendsReact: boolean = next.extends?.includes(react) ?? false;
-const recommendedExtendsVite: boolean = recommended.extends?.includes(vite) ?? false;
+const kind: ProjectKind = 'node';
+const options: ConfigureOptions = { typeAware: 'rules', ignorePatterns: ['generated/**'] };
+const configured: OxlintConfig = configure(kind, options);
 
-// Formatter config must satisfy the shared shape on TS 6.
+const nodeDropsBrowser: boolean = node.env?.browser === false;
+const recommendedIsLibrary: boolean = recommended === library;
+const typeAwareEnabled: boolean = configure('library', { typeAware: true }).options?.typeAware === true;
+
 const fmt: OxfmtConfig = oxfmtConfig;
 
-// Ignore-list exports must keep their array types on TS 6.
-const ignoreLists: string[][] = [commonIgnores, viteIgnores, nextIgnores, formatIgnores];
+const ignoreLists: string[][] = [commonIgnores, viteIgnores, nextIgnores, expoIgnores, formatIgnores];
 const filePatterns: string[][] = [allJsTsFiles, jsFiles, tsFiles];
 
 export {
+  configured,
   filePatterns,
   fmt,
   ignoreLists,
   lintPresets,
-  nextExtendsReact,
-  reactExtendsTs,
-  recommendedExtendsVite,
-  tsExtendsBase,
-  viteExtendsReact,
+  nodeDropsBrowser,
+  recommendedIsLibrary,
+  typeAwareEnabled,
 };

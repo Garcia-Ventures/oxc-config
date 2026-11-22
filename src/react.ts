@@ -1,18 +1,25 @@
 /**
  * @gv-tech/oxc-config - React Oxlint configuration
  *
- * Extends TypeScript with `react` + `jsx-a11y`. React Compiler lint rules
- * are experimental upstream and stay off by default.
+ * Flat composition of `typescript` plus `react` and `jsx-a11y`. React Compiler
+ * lint rules are experimental upstream and stay off by default.
+ *
+ * The React version lives on this object (`settings.react.version`) because
+ * Oxlint does not inherit `settings` through `extends`. Override it with
+ * `configure(react, { reactVersion: '18.3.1' })`.
  */
 
+import { compose } from './compose.js';
 import type { OxlintConfig } from './types.js';
 import { typescript } from './typescript.js';
 
-export const react: OxlintConfig = {
-  extends: [typescript],
-  plugins: ['eslint', 'typescript', 'import', 'react', 'jsx-a11y', 'unicorn', 'oxc'],
+/** Default `settings.react.version` for React presets. */
+export const defaultReactVersion = '19.0.0';
+
+export const react: OxlintConfig = compose(typescript, {
+  plugins: ['react', 'jsx-a11y'],
   settings: {
-    react: { version: '19.0.0' },
+    react: { version: defaultReactVersion },
   },
   rules: {
     'react/self-closing-comp': 'warn',
@@ -21,6 +28,6 @@ export const react: OxlintConfig = {
     'jsx-a11y/alt-text': 'warn',
     'jsx-a11y/anchor-is-valid': 'warn',
   },
-};
+});
 
 export default react;

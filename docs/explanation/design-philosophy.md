@@ -7,9 +7,11 @@
 ## Why Oxc
 
 Oxlint and Oxfmt are Rust-based and orders of magnitude faster than
-ESLint + Prettier, with `defineConfig` TypeScript configs that make
-shareable presets trivial (`extends: [...]` / object spread). One
-package now covers both lint and format.
+ESLint + Prettier, with `defineConfig` TypeScript configs. One package
+covers both lint and format. Oxlint's `extends` merges rules, plugins,
+overrides, and categories, and it drops `env`, `ignorePatterns`, and
+`settings`. Presets are therefore flat objects, and `configure()` merges
+a project's overrides onto that object.
 
 ## Balanced strictness
 
@@ -27,11 +29,16 @@ needs `oxlint-tsgolint`, hence excluded from the default).
 
 ## Layered composition
 
-Each preset `extends` the previous one, so `vite` and `next` share the
-same TypeScript + React foundation and differ only in framework
-plugins, envs, overrides, and ignores. `recommended` is `vite` without
-Next.js rules — the safest single default, and the package default
-export.
+Each preset is built from the previous one in source, then published as
+a single object: categories, plugins, rules, overrides, env, ignores,
+and settings all sit on that object. `vite` and `next` share the
+TypeScript + React foundation and differ in framework plugins, envs,
+overrides, and ignores. `expo` is the React foundation without browser
+globals. `node` and `library` stop before React.
+
+`recommended` is `library`. That is the safe default for a repo that
+is not a specific app. Vite, Next, and Expo projects pick those presets
+by name.
 
 ## Formatting replaces plugins with built-ins
 

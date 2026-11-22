@@ -20,9 +20,10 @@ positives) or Vitest globals onto Next.js apps (noise).
 ## Decision rule
 
 - Next.js app (App or Pages Router) → `next`.
-- Anything else React (Vite SPA, library, Remix-etc.) → `vite`.
-- Unsure or plain TypeScript → `recommended` (Vite-light, no
-  framework-specific rules) or `typescript`.
+- Expo or React Native → `expo`.
+- Anything else React (Vite SPA, Remix-etc.) → `vite`.
+- Node service or CLI → `node`.
+- TypeScript library, or you are unsure → `recommended` (`library`).
 
-Both presets extend the same `react` foundation, so switching later is
-a one-line import change.
+`vite`, `next`, and `expo` share the same React foundation. Switching
+later is a one-line change to the object passed to `defineConfig`.
