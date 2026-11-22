@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.5.0...oxc-config-v1.6.0) (2026-11-22)
+
+
+### Features
+
+* introduce configure function for project-specific Oxlint configurations ([89b745a](https://github.com/Garcia-Ventures/oxc-config/commit/89b745a9ae442cad18c58f617d89c4aa90c09bab))
+
 ## [1.5.0](https://github.com/Garcia-Ventures/oxc-config/compare/oxc-config-v1.4.0...oxc-config-v1.5.0) (2026-11-20)
 
 
